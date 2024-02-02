@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:connectivity_plus/connectivity_plus.dart';
+// import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -70,7 +70,7 @@ class Helpers {
     ));
   }
 
-  static Future<bool> verifyInternet() async {
+  /*static Future<bool> verifyInternet() async {
     var connectivityResult = await (Connectivity().checkConnectivity());
     if (connectivityResult == ConnectivityResult.mobile) {
       return true;
@@ -78,7 +78,7 @@ class Helpers {
       return true;
     }
     return false;
-  }
+  }*/
   static String errorString(String errorList) {
     var parts = errorList.split('[');
     var prefix = parts[1].trim();

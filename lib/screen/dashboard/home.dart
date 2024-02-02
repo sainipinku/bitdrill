@@ -124,7 +124,7 @@ class _HomeState extends State<Home> {
                         child: SmoothPageIndicator(
                             controller: _controller,
                             count: banner.length,
-                            effect:  ExpandingDotsEffect(
+                            effect:  const ExpandingDotsEffect(
                                 radius: 8,
                                 spacing: 8,
                                 dotHeight: 8,

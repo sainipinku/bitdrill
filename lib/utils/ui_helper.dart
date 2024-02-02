@@ -236,7 +236,10 @@ mainBtn({
       width: width ?? double.infinity,
       alignment: Alignment.center,
       margin: EdgeInsets.symmetric(vertical: 10),
-      decoration: btnGradient(),
+      decoration : BoxDecoration(
+        borderRadius: BorderRadius.circular(20),
+        color: MyAppTheme.blackLightColor
+      ),
       child: (icon != null) ?
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -548,12 +551,7 @@ Text white12DarkText(String text) {
   );
 }
 
-Text black12DarkText(String text) {
-  return Text(
-    text,
-    style: MyStyles.black12BoldStyle,
-  );
-}
+
 
 
 Text termsTextDark12Text(String text) {
@@ -562,7 +560,6 @@ Text termsTextDark12Text(String text) {
     style: MyStyles.termsTextDark12Style,
   );
 }
-
 Text termsTextLight12Text(String text) {
   return Text(
     text,
@@ -573,5 +570,44 @@ Text termsText14Text(String text) {
   return Text(
     text,
     style: MyStyles.termsText14Style,
+  );
+}
+
+
+
+
+///////////////// Dark Black //////////////////////////
+Text black14DarkText(String text) {
+  return Text(
+    text,
+    style: MyStyles.black14BoldStyle,
+  );
+}
+
+
+///////////////// Black //////////////////////////
+
+Text black16Text(String text) {
+  return Text(
+    text,
+    style: MyStyles.black16BoldStyle,
+  );
+}
+
+Text black14Text(String text) {
+  return Text(
+    text,
+    style: MyStyles.black14BoldStyle,
+  );
+}
+
+
+///// black light
+
+
+Text blackLight12Text(String text) {
+  return Text(
+    text,
+    style: MyStyles.lightBlack12RegularStyle,
   );
 }

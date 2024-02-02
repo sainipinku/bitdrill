@@ -72,8 +72,7 @@ Widget emailTextField ( {required TextEditingController controller , String? svg
         }
       },
       decoration: InputDecoration(
-        prefixIcon: (svgIcon != null)
-            ? svgImage(img: svgIcon) : null,
+        prefixIcon: (svgIcon != null) ? svgImage(img: svgIcon) : null,
         // contentPadding: const EdgeInsets.all(12),
         hintText: enterEmailText,
         hintStyle: MyStyles.hintTextStyle,
@@ -112,6 +111,7 @@ Widget passwordTextField ( {required TextEditingController controller ,
   VoidCallback? onEyeTap,
   bool isObscureBtnVisible =true,
   String? svgIcon,
+  Icon? prefixIcon,
   EdgeInsets? scrollPadding,
   bool isObscureText = false}) {
   return TextFormField(
@@ -129,68 +129,75 @@ Widget passwordTextField ( {required TextEditingController controller ,
       },
       obscureText: isObscureText,
       obscuringCharacter: '*',
-      style: MyStyles.white14lightStyle,
+      style: MyStyles.black14BoldStyle,
       decoration: InputDecoration(
         suffixIcon:(isObscureBtnVisible)? GestureDetector(
           onTap: onEyeTap,
-          child: (isObscureText)?
-          svgImage(img: MyIcons.eye,color: MyAppTheme.whiteColor):
-              svgImage(img: MyIcons.eyeOff,height: 24,width: 24,color: MyAppTheme.whiteColor),
+          child: const Icon(Icons.remove_red_eye_rounded),
         ):null,
         // contentPadding: const EdgeInsets.all(12),
+        prefixIcon: prefixIcon,
         hintText: hintText ?? '*************',
-
 
         disabledBorder: OutlineInputBorder(
             borderSide: BorderSide(
-                color: MyAppTheme.whiteColor),
-            borderRadius: BorderRadius.all(
-                Radius.circular(10))),
+                color: MyAppTheme.blackLightColor),
+            borderRadius: const BorderRadius.all(
+                Radius.circular(5))),
         enabledBorder: OutlineInputBorder(
             borderSide: BorderSide(
-                color: MyAppTheme.whiteColor),
-            borderRadius: BorderRadius.all(
-                Radius.circular(10))),
-        hintStyle: MyStyles.hintTextStyle,
+                color: MyAppTheme.blackLightColor),
+            borderRadius: const BorderRadius.all(
+                Radius.circular(5))),
+        hintStyle: MyStyles.lightBlack14RegularStyle,
         errorBorder: OutlineInputBorder(
             borderSide: BorderSide(
                 color: MyAppTheme.errorColor),
-            borderRadius: BorderRadius.all(
-                Radius.circular(10))
+            borderRadius: const BorderRadius.all(
+                Radius.circular(5))
         ),
         focusedErrorBorder: OutlineInputBorder(
             borderSide: BorderSide(
-                color: MyAppTheme.errorColor),
-            borderRadius:  BorderRadius.all(
-                Radius.circular(10))
+                color: MyAppTheme.blackLightColor),
+            borderRadius:  const BorderRadius.all(
+                Radius.circular(5))
         ),
         focusedBorder: OutlineInputBorder(
             borderSide: BorderSide(
-                color: MyAppTheme.whiteColor),
-            borderRadius: BorderRadius.circular(10)),
+                color: MyAppTheme.blackLightColor),
+            borderRadius: BorderRadius.circular(5)),
       ));
 }
 
-
+/*
 Widget customTextField ( {
   required TextEditingController controller ,
   String? svgIcon,
+  Icon? suffixIcon,
+  Icon? prefixIcon,
   EdgeInsets? scrollPadding,
   String? hintText,
-  VoidCallback? onIconTap,
+  VoidCallback? onIconTapSuffix,
+  VoidCallback? onIconTapPrefix,
   TextInputType? textInputType,
   bool? disabled}) {
   return TextFormField(
     //enabled: (disabled== null)? true : !disabled,
-      style: MyStyles.white14lightStyle,
+      style: MyStyles.lightBlack14BoldStyle,
       textCapitalization: TextCapitalization.words,
       scrollPadding: (scrollPadding == null) ? EdgeInsets.zero : scrollPadding,
       controller: controller,
       keyboardType: textInputType?? TextInputType.text,
+
       decoration: InputDecoration(
-        prefixIcon: (svgIcon != null)
+        suffix: (suffixIcon != null) ? suffixIcon : (svgIcon != null)
             ? GestureDetector(
-          onTap: onIconTap,
+            onTap: onIconTapSuffix,
+            child: svgImage(img: svgIcon)
+        ) : null,
+        prefix: (prefixIcon != null)?prefixIcon:(svgIcon != null)
+            ? GestureDetector(
+          onTap: onIconTapPrefix,
           child: svgImage(img: svgIcon)
         ) : null,
         //contentPadding: const EdgeInsets.all(12),
@@ -198,30 +205,121 @@ Widget customTextField ( {
         hintStyle: MyStyles.hintTextStyle,
         enabledBorder: OutlineInputBorder(
             borderSide: BorderSide(
-                color: MyAppTheme.whiteColor),
+                color: MyAppTheme.blackTextColor),
             borderRadius: BorderRadius.all(
-                Radius.circular(10))),
-
+                Radius.circular(5))),
         disabledBorder: OutlineInputBorder(
             borderSide: BorderSide(
-                color: MyAppTheme.whiteColor),
+                color: MyAppTheme.blackTextColor),
             borderRadius: BorderRadius.all(
-                Radius.circular(10))),
+                Radius.circular(5))),
         errorBorder: OutlineInputBorder(
             borderSide: BorderSide(
-                color: MyAppTheme.errorColor),
+                color: MyAppTheme.blackTextColor),
             borderRadius: BorderRadius.all(
-                Radius.circular(10))
+                Radius.circular(5))
         ),
         focusedErrorBorder: OutlineInputBorder(
             borderSide: BorderSide(
                 color: MyAppTheme.errorColor),
             borderRadius:  BorderRadius.all(
-                Radius.circular(10))
+                Radius.circular(5))
         ),
         focusedBorder: OutlineInputBorder(
             borderSide: BorderSide(
-                color: MyAppTheme.whiteColor),
-            borderRadius: BorderRadius.circular(10)),
+                color: MyAppTheme.blackTextColor),
+            borderRadius: BorderRadius.circular(5)),
+      ));
+}*/
+
+Widget customTextField({
+  required TextEditingController controller ,
+  Icon? suffixIcon,
+  Icon? prefixIcon,
+  String? hintText,
+  TextInputType? textInputType,
+}){
+  return TextFormField(
+    //enabled: (disabled== null)? true : !disabled,
+      style: MyStyles.lightBlack14BoldStyle,
+      textCapitalization: TextCapitalization.words,
+      controller: controller,
+      keyboardType: textInputType ?? TextInputType.text,
+
+      decoration: InputDecoration(
+        prefixIcon: prefixIcon,
+        suffixIcon: suffixIcon,
+        //contentPadding: const EdgeInsets.all(12),
+        hintText : hintText ?? '',
+        hintStyle: MyStyles.lightBlack14RegularStyle,
+        enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(
+                color: MyAppTheme.blackTextColor),
+            borderRadius: const BorderRadius.all(
+                Radius.circular(5))),
+        disabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(
+                color: MyAppTheme.blackTextColor),
+            borderRadius: const BorderRadius.all(
+                Radius.circular(5))),
+        errorBorder: OutlineInputBorder(
+            borderSide: BorderSide(
+                color: MyAppTheme.blackTextColor),
+            borderRadius: const BorderRadius.all(
+                Radius.circular(5))
+        ),
+        focusedErrorBorder: OutlineInputBorder(
+            borderSide: BorderSide(
+                color: MyAppTheme.errorColor),
+            borderRadius:  const BorderRadius.all(
+                Radius.circular(5))
+        ),
+        focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(
+                color: MyAppTheme.blackTextColor),
+            borderRadius: BorderRadius.circular(5)),
       ));
 }
+
+
+Widget underLineTextField({
+  required TextEditingController controller ,
+  Icon? suffixIcon,
+  Icon? prefixIcon,
+  String? hintText,
+  TextInputType? textInputType,
+}){
+  return TextFormField(
+    //enabled: (disabled== null)? true : !disabled,
+      style: MyStyles.lightBlack14BoldStyle,
+      textCapitalization: TextCapitalization.words,
+      controller: controller,
+      keyboardType: textInputType ?? TextInputType.text,
+
+      decoration: InputDecoration(
+        prefixIcon: prefixIcon,
+        suffixIcon: suffixIcon,
+        //contentPadding: const EdgeInsets.all(12),
+        hintText : hintText ?? '',
+        hintStyle: MyStyles.lightBlack14RegularStyle,
+        enabledBorder: UnderlineInputBorder(
+            borderSide: BorderSide(
+                color: MyAppTheme.blackTextColor),),
+        disabledBorder: UnderlineInputBorder(
+            borderSide: BorderSide(
+                color: MyAppTheme.blackTextColor),),
+        errorBorder: UnderlineInputBorder(
+            borderSide: BorderSide(
+                color: MyAppTheme.blackTextColor),
+        ),
+        focusedErrorBorder: UnderlineInputBorder(
+            borderSide: BorderSide(
+                color: MyAppTheme.errorColor),
+        ),
+        focusedBorder: UnderlineInputBorder(
+            borderSide: BorderSide(
+                color: MyAppTheme.blackTextColor),)
+      ));
+}
+
+

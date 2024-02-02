@@ -17,7 +17,7 @@ class MyAppTheme {
   static  Color calendarGreyColor = const Color(0xFF666666);
   static  Color carPartContainer = const Color(0xFFB5C7C5);
   static  Color carPartText = const Color(0xFF4D4D4D);
-  static  Color blackTextColor = const Color(0xFF333333);
+  //static  Color blackTextColor = const Color(0xFF333333);
   //static  Color hintTextColor = const Color(0xFFB3B3B3);
   static  Color darkBlueColor = const Color(0xFF472DE6);
   static  Color lightBlueColor = const Color(0xFF2D61E6);
@@ -39,13 +39,23 @@ class MyAppTheme {
   static  Color hintTextColor = const Color(0xffAFADE6);
   static  Color goldenColor = const Color(0xFFFFF500);
   static  Color planContainerColor = const Color(0xff362F87);
-  static  Color whiteColor = const Color(0xFFFFFFFF);
+  //static  Color whiteColor = const Color(0xFFFFFFFF);
   static  Color lightPurpleTextColor = const Color(0xFFD0CEFF);
   static  Color darkPurpleTextColor = const Color(0xFFD015FF);
-  static  Color blackColor = const Color(0xFF000000);
+  // static  Color blackColor = const Color(0xFF000000);
   static  Color containerBgColor = const Color(0xFF23306E);
   static  Color audioGradient1 = const Color(0xFF634C85);
   static  Color audioGradient2 = const Color(0xFF4D3169);
   static  Color redBtnColor = const Color(0xFFBC2C51);
+
+
+
+
+  //////////////////////////Bit Drill ///////////////////////
+
+  static  Color blackColor = const Color(0xFF000000);
+  static  Color whiteColor = const Color(0xFFFFFFFF);
+  static  Color blackTextColor = const Color(0xFF333333);
+
 
 }

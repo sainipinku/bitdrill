@@ -1,9 +1,9 @@
-import 'package:bitdrill/dashboard/home.dart';
-import 'package:bitdrill/dashboard/profile.dart';
-import 'package:bitdrill/dashboard/report.dart';
-import 'package:bitdrill/dashboard/team.dart';
+import 'package:bitdrill/screen/dashboard/profile.dart';
+import 'package:bitdrill/screen/dashboard/report.dart';
+import 'package:bitdrill/screen/dashboard/team.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'home.dart';
 
 
 class DashBoard extends StatefulWidget {
@@ -32,7 +32,7 @@ class _DashBoardState extends State<DashBoard> {
     return WillPopScope(
        onWillPop: () async {
         final timegap = DateTime.now().difference(pre_backpress);
-        final cantExit = timegap >= Duration(seconds: 2);
+        final cantExit = timegap >= const Duration(seconds: 2);
         pre_backpress = DateTime.now();
         if (cantExit) {
           //show snackbar

@@ -165,11 +165,37 @@ class MyStyles {
       fontSize: (1 >= 700)? 8:14,
       color: MyAppTheme.redBtnColor);
 
+
+  ////////////////////Light Black /////////////////////
+
+  ///////Bold
+  static TextStyle lightBlack14BoldStyle =  GoogleFonts.quicksand(
+      fontWeight: MyFontWeight.bold,
+      fontSize: 14,
+      color: MyAppTheme.blackTextColor);
+
+  ///////Regular
+  static TextStyle lightBlack12RegularStyle =  GoogleFonts.quicksand(
+      fontWeight: MyFontWeight.regular,
+      fontSize: 12,
+      color: MyAppTheme.blackTextColor);
+
+  static TextStyle lightBlack14RegularStyle =  GoogleFonts.quicksand(
+      fontWeight: MyFontWeight.regular,
+      fontSize: 14,
+      color: MyAppTheme.blackTextColor);
   ///////////////////////////Black////////////////////
 
-  static TextStyle black12BoldStyle =  GoogleFonts.quicksand(
+  static TextStyle black16BoldStyle =  GoogleFonts.quicksand(
       fontWeight: MyFontWeight.bold,
-      fontSize: (1 >= 700)? 6:12,
-      color: MyAppTheme.blackLightColor);
+      fontSize: 16,
+      color: MyAppTheme.blackColor);
+  static TextStyle black14BoldStyle =  GoogleFonts.quicksand(
+      fontWeight: MyFontWeight.bold,
+      fontSize: 14,
+      color: MyAppTheme.blackColor);
+
+
+
 
 }
