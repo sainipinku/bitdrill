@@ -107,3 +107,31 @@ const String planExpiredText  = 'Your Plan has expired so you won’t be able to
 
 
 //const String apiBaseUrl  = "https://employeetracking.laraveldevelopmentcompany.com/api";
+
+///////////////////////////////// This Project ///////////////////////////////
+
+const String dailyTradeProfit  = 'Daily Trade Profit';
+const String affiliateBonus  = 'Affiliate Bonus';
+const String ibTradeBonus  = 'IB Trade Bonus';
+const String weeklyIBBonusStatus  = 'Weekly IB Bonus Status';
+const String weeklyIBBonus  = 'Weekly IB Bonus';
+const String rankBonus  = 'Rank & Bonus';
+const String rewardStatus  = 'Reward Status';
+const String withdrawalHistory  = 'Withdrawal History';
+const String fundTransferHistory  = 'Fund Transfer History';
+const String incomeHistory  = 'Income History';
+const String supportHistory  = 'Support History';
+const String withdrawal  = 'Withdrawal';
+const String deposit  = 'Deposit';
+const String p2p  = 'P2P';
+const String tradeAll  = 'Trade All';
+const String remainingLimit  = 'Remaining Limit';
+const String income  = 'Income';
+const String wallet = 'Wallet';
+const String home = 'Home';
+const String type = 'Type';
+const String report = 'Report';
+const String profile = 'Profile';
+
+
+

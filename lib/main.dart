@@ -1,4 +1,5 @@
 
+import 'package:bitdrill/utils/my_app_theme.dart';
 import 'package:flutter/material.dart';
 
 import 'screen/splash/splash.dart';
@@ -13,6 +14,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData(
+        primaryColor: MyAppTheme.lightBlueColor,
+        primarySwatch: Colors.cyan
+      ),
       debugShowCheckedModeBanner: false,
       home: SplashScreen(),
     );

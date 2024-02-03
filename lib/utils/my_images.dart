@@ -14,4 +14,8 @@ class MyImages{
   static String drawerImg ='assets/images/drawerImg.png';
   static String explorerImg ='assets/images/explorer.png';
   static String cancelSubsImg ='assets/images/cacelSubsImg.png';
+
+
+  //////////////////////////////////////
+  static String thisProject ='assets/images/login.jpg';
 }

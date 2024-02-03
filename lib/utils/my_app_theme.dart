@@ -20,7 +20,7 @@ class MyAppTheme {
   //static  Color blackTextColor = const Color(0xFF333333);
   //static  Color hintTextColor = const Color(0xFFB3B3B3);
   static  Color darkBlueColor = const Color(0xFF472DE6);
-  static  Color lightBlueColor = const Color(0xFF2D61E6);
+  //static  Color lightBlueColor = const Color(0xFF2D61E6);
   static  Color purpleColor = const Color(0xFFAB2DE6);
   static  Color darkPinkColor = const Color(0xFFE62D70);
   static  Color errorColor = const Color(0xFFEA4235);
@@ -54,8 +54,10 @@ class MyAppTheme {
   //////////////////////////Bit Drill ///////////////////////
 
   static  Color blackColor = const Color(0xFF000000);
+  static  Color brownColor = const Color(0xFF4E342E);
   static  Color whiteColor = const Color(0xFFFFFFFF);
   static  Color blackTextColor = const Color(0xFF333333);
+  static  Color lightBlueColor = const Color(0xFF8bdfe8);
 
 
 }

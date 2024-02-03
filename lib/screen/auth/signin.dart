@@ -1,8 +1,7 @@
 import 'package:bitdrill/screen/auth/signup.dart';
-import 'package:bitdrill/utils/helpers/textfields.dart';
+import 'package:bitdrill/utils/helpers/textfeilds.dart';
 import 'package:bitdrill/utils/my_app_theme.dart';
 import 'package:flutter/material.dart';
-
 import '../../utils/constants.dart';
 import '../../utils/my_styles.dart';
 import '../../utils/ui_helper.dart';
@@ -63,7 +62,9 @@ class _SignInState extends State<SignIn> {
                 ),
                 mainBtn(text: 'Sign In',
                     width: width*.7,
-                    onTap: (){}),
+                    onTap: (){
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => DashBoard(),));
+                }),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
