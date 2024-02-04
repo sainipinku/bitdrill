@@ -132,6 +132,11 @@ const String home = 'Home';
 const String type = 'Type';
 const String report = 'Report';
 const String profile = 'Profile';
+const String teamLevel = 'Team Level';
+const String active = 'Active';
+const String inActive = 'InActive';
+const String searchStatus = 'Search Status';
+const String search = 'Search';
 
 
 

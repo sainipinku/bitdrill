@@ -58,6 +58,7 @@ class MyAppTheme {
   static  Color whiteColor = const Color(0xFFFFFFFF);
   static  Color blackTextColor = const Color(0xFF333333);
   static  Color lightBlueColor = const Color(0xFF8bdfe8);
+  static  Color transparent = Colors.transparent;
 
 
 }

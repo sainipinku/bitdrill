@@ -282,6 +282,62 @@ Widget customTextField({
 }
 
 
+
+Widget whiteTextField({
+  required TextEditingController controller ,
+  Icon? suffixIcon,
+  Icon? prefixIcon,
+  String? hintText,
+  TextInputType? textInputType,
+}){
+  return Container(
+    color: MyAppTheme.whiteColor,
+    padding: const EdgeInsets.symmetric(horizontal: 8),
+    child: TextFormField(
+      //enabled: (disabled== null)? true : !disabled,
+        style: MyStyles.lightBlack14BoldStyle,
+        textCapitalization: TextCapitalization.words,
+        controller: controller,
+        keyboardType: textInputType ?? TextInputType.text,
+
+        decoration: InputDecoration(
+
+          prefixIcon: prefixIcon,
+          suffixIcon: suffixIcon,
+          //contentPadding: const EdgeInsets.all(12),
+          hintText : hintText ?? '',
+          hintStyle: MyStyles.lightBlack14RegularStyle,
+          enabledBorder: OutlineInputBorder(
+              borderSide: BorderSide(
+                  color: MyAppTheme.transparent),
+              borderRadius: const BorderRadius.all(
+                  Radius.circular(5))),
+          disabledBorder: OutlineInputBorder(
+              borderSide: BorderSide(
+                  color: MyAppTheme.transparent),
+              borderRadius: const BorderRadius.all(
+                  Radius.circular(5))),
+          errorBorder: OutlineInputBorder(
+              borderSide: BorderSide(
+                  color: MyAppTheme.errorColor),
+              borderRadius: const BorderRadius.all(
+                  Radius.circular(5))
+          ),
+          focusedErrorBorder: OutlineInputBorder(
+              borderSide: BorderSide(
+                  color: MyAppTheme.errorColor),
+              borderRadius:  const BorderRadius.all(
+                  Radius.circular(5))
+          ),
+          focusedBorder: OutlineInputBorder(
+              borderSide: BorderSide(
+                  color: Colors.transparent),
+              borderRadius: BorderRadius.circular(5)),
+        )),
+  );
+}
+
+
 Widget underLineTextField({
   required TextEditingController controller ,
   Icon? suffixIcon,

@@ -21,127 +21,12 @@ Widget svgImage({required String img, double? height, double? width, Color? colo
   );
 }
 
-Widget svgMenuImage({double? height, double? width, Color? color}) {
-  return Transform.scale(
-    scale: 1.4,
-    child: SvgPicture.asset(
-      MyIcons.menuIc,
-      height: height ?? 24,
-      width: width ?? 24,
-      fit: BoxFit.scaleDown,
-      color: color,
-    ),
-  );
-}
-
-Widget logoutDialog(BuildContext context) {
-  return Dialog(
-    shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(31)
-    ),
-    child: Container(
-      padding: EdgeInsets.all(20),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(30),
-          gradient: LinearGradient(
-              colors: [MyAppTheme.gradient1purple, MyAppTheme.gradient2lightPurple],
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter)
-      ),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          white18boldText(areYouSureYouToLogout),
-          white12LightText(logoutText),
-          SizedBox(height: 5,),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              GestureDetector(
-                onTap: (){
-                  Navigator.pop(context);
-                },
-                child: Container(
-                  padding: EdgeInsets.symmetric(vertical: 10),
-                  width: 120,
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                      color: MyAppTheme.redBtnColor,
-                      borderRadius: BorderRadius.circular(10)
-                  ),
-                  child: white16BoldText('No'),
-                ),
-              ),
-              GestureDetector(
-                onTap: () async {
-                },
-                child: Container(
-                  padding: EdgeInsets.symmetric(vertical: 10),
-                  width: 120,
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                      border:Border.all(
-                        color: MyAppTheme.gradient1btn,
-                      ),
-                      borderRadius: BorderRadius.circular(10)
-                  ),
-                  child: white16BoldText('Yes'),
-                ),
-              ),
-            ],
-          )
-        ].map((e) => Padding(padding: EdgeInsets.symmetric(vertical: 3),child: e,)).toList(),
-      ),
-    ),
-  );
-}
-
-Widget customElevatedBtnWithWidget(
-    {required Widget child,
-    required VoidCallback onTap,
-    double? height,
-    Color? bgColor,
-    Color? borderColor,
-    double? width,}) {
-  return ElevatedButton(
-      onPressed: onTap,
-      style: ElevatedButton.styleFrom(
-        elevation: 0,
-          backgroundColor: bgColor ?? Colors.transparent,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(11),
-            side: BorderSide(
-              color: borderColor ?? Colors.transparent
-            )
-          ),
-          fixedSize: Size((width != null) ? width : double.infinity,
-              (height != null) ? height : 50)),
-      child: child);
-}
-//
 // void hideKeyboard(BuildContext context) {
 //   FocusScopeNode currentFocus = FocusScope.of(context);
 //   if (!currentFocusasPrimaryFocus) {
 //     currentFocus.unfocus();
 //   }
 // }
-
-backgroundGradient() {
-  return BoxDecoration(
-      gradient: LinearGradient(
-          colors: [MyAppTheme.gradient1purple, MyAppTheme.gradient2lightPurple],
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter));
-}
-
-btnGradient({BorderRadius? borderRadius}) {
-  return BoxDecoration(
-      borderRadius: borderRadius ?? BorderRadius.circular(10),
-      gradient: LinearGradient(
-          colors: [MyAppTheme.gradient1btn, MyAppTheme.gradient2lightBtn],
-          begin: Alignment.centerLeft,
-          end: Alignment.centerRight));
-}
 
 backBtn({
   required BuildContext context,
@@ -193,7 +78,6 @@ circularImage(String imgUrl,{double? height,double? width,}) {
   );
 }
 
-
 circularNetworkImage(String imgUrl) {
   return Container(
     height: 72,
@@ -219,14 +103,28 @@ circularNetworkImage(String imgUrl) {
   );
 }
 
+customAppBar({
+  required String title,
+  Widget? backBtn,
+}){
+  return AppBar(
+    title: white16BoldText(title),
+    centerTitle: true,
+    leading: backBtn ?? const SizedBox.shrink(),
+    backgroundColor: MyAppTheme.brownColor,
+  );
+}
+
 mainBtn({
   required String text,
   required VoidCallback onTap,
   double? height,
   double? width,
   Widget? icon,
+  bool focus =true,
+  double? borderRadius
 }) {
-  return GestureDetector(
+  return InkWell(
     onTap: onTap,
     child: Container(
       //height: height ?? 56,
@@ -235,259 +133,24 @@ mainBtn({
       alignment: Alignment.center,
       margin: const EdgeInsets.symmetric(vertical: 10),
       decoration : BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
-        color: MyAppTheme.brownColor
+        borderRadius: BorderRadius.circular(borderRadius ?? 10),
+        color: focus ?MyAppTheme.brownColor :Colors.transparent,
+          border: Border.all(color: MyAppTheme.brownColor)
       ),
       child: (icon != null) ?
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-            white16BoldText(text),
+            focus ? white16BoldText(text) : black16Text(text),
             const SizedBox(width: 5,),
             icon,
           ],)
-          :white16BoldText(text),
+          :focus ? white16BoldText(text) : black16Text(text),
     ),
   );
 }
 
 
-secondaryBtn({
-  required String text,
-  required VoidCallback onTap,
-  double? height,
-  double? width,
-  Widget? icon,
-}) {
-  return GestureDetector(
-    onTap: onTap,
-    child: Container(
-      //height: height ?? 56,
-      padding: const EdgeInsets.symmetric(vertical: (1 >700)?10:18),
-      width: width ?? double.infinity,
-      alignment: Alignment.center,
-      margin: const EdgeInsets.symmetric(vertical: 10),
-      decoration : BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
-        color: MyAppTheme.brownColor
-      ),
-      child: (icon != null) ?
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-            white16BoldText(text),
-            const SizedBox(width: 5,),
-            icon,
-          ],)
-          :white16BoldText(text),
-    ),
-  );
-}
-
-circularBtn({
-  required String icon, required VoidCallback onTap, double? height, double? width, double? scaleFactor,
-}) {
-  return GestureDetector(
-    onTap: onTap,
-    child: Container(
-      height: height ?? 56,
-      width: width ?? 56,
-      alignment: Alignment.center,
-      margin: EdgeInsets.symmetric(vertical: 10),
-      decoration: btnGradient(
-        borderRadius: BorderRadius.circular((width != null) ? width / 2 : 28),
-      ),
-      child: svgImage(
-        img: icon,
-        scaleFactor: scaleFactor
-      ),
-    ),
-  );
-}
-
-storyContainer({
-  required String img,
-  required String storyTitle,
-  required String dateOfStory,
-  VoidCallback? onTap
-}) {
-  return Container(
-    width: double.infinity,
-    //height: 112,
-    margin: EdgeInsets.symmetric(vertical: 10),
-    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-    decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
-        color: MyAppTheme.containerFillingColor,
-        border: Border.all(color: MyAppTheme.gradient1btn)),
-    child: Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        //circularImage(img),
-        circularNetworkImage(img),
-        Expanded(
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 10.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                white16BoldText(storyTitle),
-                SizedBox(
-                  height: 4,
-                ),
-                white12LightText(dateOfStory)
-              ],
-            ),
-          ),
-        ),
-        circularBtn(icon: MyIcons.playIc, onTap: onTap ?? () {})
-      ],
-    ),
-  );
-}
-
-drawerTile({VoidCallback? onTap,required String icon,required String title}){
-  return GestureDetector(
-    onTap: onTap,
-    child: Container(
-      color: Colors.transparent,
-      width: double.infinity,
-      padding:  EdgeInsets.symmetric(vertical: 12.0),
-      child: Row(
-        children: [
-          svgImage(img: icon),
-          SizedBox(width: 10,),
-          normalText(title)
-        ],
-      ),
-    ),
-  );
-}
-
-subscriptionContainer({
-  required String subscriptionTitle,
-  required String subscriptionPrice,
-  required String subscriptionValidity,
-  required String perDayStoryCount,
-  required String childLimit,
-  required String storyExpiry,
-  required bool subsStatus,
-  required VoidCallback onTap,
-}) {
-  return Container(
-      width: double.infinity,
-      alignment: Alignment.center,
-      margin: EdgeInsets.only(bottom: 10),
-      padding: EdgeInsets.all(16),
-      decoration: BoxDecoration(
-          border: Border.all(color: MyAppTheme.gradient2lightPurple),
-          borderRadius: BorderRadius.circular(10),
-          color: MyAppTheme.containerFillingColor),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              white16BoldText(subscriptionTitle),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  white16BoldText('\$$subscriptionPrice/'),
-                  white12LightText(subscriptionValidity),
-                ],
-              ),
-            ],
-          ),
-          Divider(
-            color: MyAppTheme.whiteColor,
-          ),
-          Row(
-            children: [
-              Icon(
-                Icons.circle,
-                color: MyAppTheme.whiteColor,
-                size: 6,
-              ),
-              SizedBox(
-                width: 5,
-              ),
-              RichText(
-                text: TextSpan(
-                    text: "$perDayStoryCount Story ",
-                    style: MyStyles.white12BoldStyle,
-                    children: [
-                      TextSpan(
-                          text: 'per Day',
-                          style: MyStyles.white12LightStyle),
-                    ]),
-              ),
-            ],
-          ),
-          Row(
-            children: [
-              Icon(
-                Icons.circle,
-                color: MyAppTheme.whiteColor,
-                size: 6,
-              ),
-              SizedBox(
-                width: 5,
-              ),
-              RichText(
-                text: TextSpan(
-                    text: "$childLimit Child ",
-                    style: MyStyles.white12BoldStyle,
-                    children: [
-                      TextSpan(
-                          text: 'profile creation',
-                          style: MyStyles.white12LightStyle),
-                    ]),
-              ),
-            ],
-          ),
-          Row(
-            children: [
-              Icon(
-                Icons.circle,
-                color: MyAppTheme.whiteColor,
-                size: 6,
-              ),
-              SizedBox(
-                width: 5,
-              ),
-              RichText(
-                text: TextSpan(
-                    text: "Access to past ",
-                    style: MyStyles.white12LightStyle,
-                    children: [
-                      TextSpan(
-                          text: '$storyExpiry days stories', style: MyStyles.white12BoldStyle),
-                    ]),
-              ),
-            ],
-          ),
-          Divider(
-            color: MyAppTheme.whiteColor,
-          ),
-          InkWell(
-            onTap: onTap,
-            child: Center(
-              child: Text(
-                (subsStatus)? "Subscribed": "Subscribe",
-                style: MyStyles.underLineSubHeading,
-              ),
-            ),
-          ),
-        ]
-            .map((e) => Padding(
-                  padding: EdgeInsets.symmetric(vertical: 2),
-                  child: e,
-                ))
-            .toList(),
-      ));
-}
 
 /////////////////Flutter Toast////////////////////////////
 
@@ -581,30 +244,6 @@ Text white12DarkText(String text) {
     style: MyStyles.white12BoldStyle,
   );
 }
-
-
-
-
-Text termsTextDark12Text(String text) {
-  return Text(
-    text,
-    style: MyStyles.termsTextDark12Style,
-  );
-}
-Text termsTextLight12Text(String text) {
-  return Text(
-    text,
-    style: MyStyles.termsText12Style,
-  );
-}
-Text termsText14Text(String text) {
-  return Text(
-    text,
-    style: MyStyles.termsText14Style,
-  );
-}
-
-
 
 
 ///////////////// Dark Black //////////////////////////

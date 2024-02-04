@@ -83,7 +83,6 @@ class DailyTradeProfit extends StatelessWidget {
                                 ),
                                 child: Row(
                                   children: [
-
                                     const SizedBox(width: 4),
                                     Text(
                                       '\$ ${tradeData.amount}',

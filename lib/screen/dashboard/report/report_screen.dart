@@ -64,7 +64,6 @@ class ReportScreen extends StatelessWidget {
     height = MediaQuery.sizeOf(context).height;
     return Scaffold(
       appBar: AppBar(
-
         title: white16BoldText('Report'),
         centerTitle: true,
         leading: const SizedBox.shrink(),
