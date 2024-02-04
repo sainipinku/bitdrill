@@ -35,6 +35,8 @@ dependencies:
   cupertino_icons: ^1.0.2
   # smooth page indicator
   smooth_page_indicator: ^1.0.0+2
+  # intl
+  intl: ^0.17.0
   flutter_svg: ^2.0.9
   fluttertoast: ^8.2.4
   http: ^1.1.0
