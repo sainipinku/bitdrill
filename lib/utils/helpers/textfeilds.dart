@@ -287,6 +287,8 @@ Widget whiteTextField({
   required TextEditingController controller ,
   Icon? suffixIcon,
   Icon? prefixIcon,
+  Widget? prefix,
+  Widget? suffix,
   String? hintText,
   TextInputType? textInputType,
 }){
@@ -304,6 +306,8 @@ Widget whiteTextField({
 
           prefixIcon: prefixIcon,
           suffixIcon: suffixIcon,
+          prefix: prefix,
+          suffix: suffix,
           //contentPadding: const EdgeInsets.all(12),
           hintText : hintText ?? '',
           hintStyle: MyStyles.lightBlack14RegularStyle,

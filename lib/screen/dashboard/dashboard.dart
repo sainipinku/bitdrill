@@ -1,12 +1,12 @@
-import 'package:bitdrill/screen/dashboard/profile.dart';
+import 'package:bitdrill/screen/dashboard/profile/profile.dart';
 import 'package:bitdrill/screen/dashboard/report/report_screen.dart';
-import 'package:bitdrill/screen/dashboard/team.dart';
+import 'package:bitdrill/screen/dashboard/teams/team.dart';
 import 'package:bitdrill/utils/constants.dart';
 import 'package:bitdrill/utils/my_app_theme.dart';
 import 'package:bitdrill/utils/my_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'home.dart';
+import 'home/home.dart';
 
 
 class DashBoard extends StatefulWidget {
@@ -23,7 +23,7 @@ class _DashBoardState extends State<DashBoard> {
     Home(),
     Team(),
     ReportScreen(),
-    Profile(),
+    ProfileScreen(),
   ];
   void _onItemTapped(int index) {
     setState(() {

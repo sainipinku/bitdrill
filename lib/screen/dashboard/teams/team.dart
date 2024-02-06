@@ -2,8 +2,8 @@ import 'package:bitdrill/utils/helpers/textfeilds.dart';
 import 'package:bitdrill/utils/my_app_theme.dart';
 import 'package:bitdrill/utils/ui_helper.dart';
 import 'package:flutter/material.dart';
+import '../../../utils/constants.dart';
 
-import '../../utils/constants.dart';
 
 class Team extends StatefulWidget {
   const Team({Key? key}) : super(key: key);

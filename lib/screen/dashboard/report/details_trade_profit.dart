@@ -1,108 +1,57 @@
 import 'package:bitdrill/utils/constants.dart';
+import 'package:bitdrill/utils/my_app_theme.dart';
+import 'package:bitdrill/utils/ui_helper.dart';
 import 'package:flutter/material.dart';
 
 class DailyTradeProfit extends StatelessWidget {
-  const DailyTradeProfit({super.key});
+  DailyTradeProfit({super.key});
+
+  late double width;
+  late double height;
 
   @override
   Widget build(BuildContext context) {
+    width =MediaQuery.sizeOf(context).width;
+    height =MediaQuery.sizeOf(context).height;
     return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          'Daily Trade Profit',
-          style: TextStyle(color: Colors.white),
-        ),
-        leading: IconButton(
-          icon: const Icon(
-            Icons.arrow_back,
-            color: Colors.white,
-          ),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
-        backgroundColor: const Color(0xFF350304),
-      ),
-      body: FutureBuilder<List<TradeData>>(
-        future: fetchData(),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
-          } else if (snapshot.hasError) {
-            return Center(child: Text('Error: ${snapshot.error}'));
-          } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-            return const Center(child: Text('No data available.'));
-          } else {
-            return Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0),
-              child: ListView.builder(
-                itemCount: snapshot.data!.length,
-                itemBuilder: (context, index) {
-                  final tradeData = snapshot.data![index];
-                  return Container(
-                    margin: const EdgeInsets.symmetric(vertical: 4),
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        color: Colors.black26,
-                        width: 1,
-                      ),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-
-                        children: [
-                          SizedBox(
-                            width: MediaQuery.sizeOf(context).width*.7,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                /*style: const TextStyle(fontWeight: FontWeight.bold,fontSize: 15),*/
-                                Text('Member Name: ${tradeData.name}',),
-                                Text('Date: ${tradeData.date}'),
-                              ],
-                            ),
-                          ),
-                          Column(
-                            mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: [
-                              Text(
-                                ' ${tradeData.id}',
-                                style: const TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
-                              ),
-
-                              Container(
-                                padding: const EdgeInsets.all(8),
-                                decoration: BoxDecoration(
-                                  color: const Color(0xFF340402),
-                                  borderRadius: BorderRadius.circular(5),
-                                ),
-                                child: Row(
-                                  children: [
-                                    const SizedBox(width: 4),
-                                    Text(
-                                      '\$ ${tradeData.amount}',
-                                      style: const TextStyle(color: Colors.white),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                  );
-                },
+      appBar: customAppBar(title: dailyTradeProfit,backBtn: backBtn(context: context)),
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: ListView.builder(
+          itemCount: 2,
+          itemBuilder: (context, index) =>  Container(
+              padding: const EdgeInsets.all(10),
+              margin: const EdgeInsets.symmetric(vertical: 4),
+              decoration: BoxDecoration(
+                border: Border.all(
+                  color: MyAppTheme.brownColor,
+                ),
+                borderRadius: BorderRadius.circular(10),
               ),
-            );
-          }
-        },
-      ),
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      SizedBox(
+                          width: width*0.7,
+                          child: black16Text('Member Name: Punit Lohani',)),
+                      black16Text('258585',),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      blackLight14Text('03 Feb 2024',),
+                      miniBrownContainer(text: '\$ 25'),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+
+        ),
+      )
     );
   }
 
@@ -134,4 +83,74 @@ class TradeData {
     required this.amount,
   });
 }
+
+/*
+FutureBuilder<List<TradeData>>(
+        future: fetchData(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: CircularProgressIndicator());
+          } else if (snapshot.hasError) {
+            return Center(child: Text('Error: ${snapshot.error}'));
+          } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+            return const Center(child: Text('No data available.'));
+          } else {
+            return Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              child: ListView.builder(
+                itemCount: snapshot.data!.length,
+                itemBuilder: (context, index) {
+                  final tradeData = snapshot.data![index];
+                  return Container(
+                    margin: const EdgeInsets.symmetric(vertical: 4),
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: MyAppTheme.brownColor,
+                      ),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          SizedBox(
+                            width: MediaQuery.sizeOf(context).width*.7,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                /*style: const TextStyle(fontWeight: FontWeight.bold,fontSize: 15),*/
+                                Text('Member Name: ${tradeData.name}',),
+                                Text('Date: ${tradeData.date}'),
+                              ],
+                            ),
+                          ),
+                          IntrinsicHeight(
+                            child: SizedBox(
+                              height: double.infinity,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
+                                children: [
+                                  Text(
+                                    ' ${tradeData.id}',
+                                    style: const TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                                  ),
+
+                                  priceContainer(price: tradeData.amount.toString())
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
+                },
+              ),
+            );
+          }
+        },
+      ),
+*/
   

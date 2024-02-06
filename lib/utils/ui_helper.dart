@@ -150,6 +150,17 @@ mainBtn({
   );
 }
 
+miniBrownContainer({required String text}){
+  return Container(
+    padding: const EdgeInsets.all(5),
+    decoration: BoxDecoration(
+      color: MyAppTheme.brownColor,
+      borderRadius: BorderRadius.circular(5),
+    ),
+    child: white14BoldText( text,),
+  );
+}
+
 
 
 /////////////////Flutter Toast////////////////////////////
@@ -257,6 +268,18 @@ Text black14DarkText(String text) {
 
 ///////////////// Black //////////////////////////
 
+Text black26Text(String text) {
+  return Text(
+    text,
+    style: MyStyles.black26BoldStyle,
+  );
+}
+Text black20Text(String text) {
+  return Text(
+    text,
+    style: MyStyles.black20BoldStyle,
+  );
+}
 Text black16Text(String text) {
   return Text(
     text,
@@ -282,9 +305,31 @@ Text black12Text(String text) {
 ///// black light
 
 
+Text blackLight14Text(String text) {
+  return Text(
+    text,
+    style: MyStyles.lightBlack14RegularStyle,
+  );
+}
 Text blackLight12Text(String text) {
   return Text(
     text,
     style: MyStyles.lightBlack12RegularStyle,
+  );
+}
+
+
+/////////brown
+
+Text brownLight14Text(String text) {
+  return Text(
+    text,
+    style: MyStyles.brownBlack14RegularStyle,
+  );
+}
+Text brown14Text(String text) {
+  return Text(
+    text,
+    style: MyStyles.brownBlack14BoldStyle,
   );
 }

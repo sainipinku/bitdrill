@@ -1,13 +1,16 @@
 import 'dart:async';
 
 import 'package:bitdrill/common_ui/common_container.dart';
+import 'package:bitdrill/screen/dashboard/home/p2p_btm_sheet.dart';
+import 'package:bitdrill/screen/dashboard/home/trade_ai.dart';
+import 'package:bitdrill/screen/dashboard/home/withdrawal_bottom_sheet.dart';
 import 'package:bitdrill/utils/my_app_theme.dart';
 import 'package:bitdrill/utils/my_images.dart';
 import 'package:bitdrill/utils/ui_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-import '../../utils/constants.dart';
+import '../../../utils/constants.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -157,11 +160,17 @@ class _HomeState extends State<Home> {
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       innerContainerComponent(img: MyImages.thisProject,
+                          onTap: (){
+                            showModalBottomSheet(context: context, builder: (context) => withdrawalBottomSheet(context: context, amount: "0.11"),);
+                          },
                           title: withdrawal),
                       innerContainerComponent(img: MyImages.thisProject,
                           title: deposit),
                       innerContainerComponent(img: MyImages.thisProject,
-                          title: p2p
+                          title: p2p,
+                          onTap: (){
+                            showModalBottomSheet(context: context, builder: (context) =>p2pBottomSheet(context: context, amount: "0.11"),);
+                          }
                       ),
                     ],
                   ),
@@ -195,7 +204,9 @@ class _HomeState extends State<Home> {
                   ),
                 ),
 
-                mainBtn(text: tradeAll, onTap: (){}),
+                mainBtn(text: tradeAll, onTap: (){
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => AccountActivation(),));
+                }),
                 Row(
                   children: [
                     Expanded(child: CommonContainer(height: height* 0.10, title: "title", value: "value")),
