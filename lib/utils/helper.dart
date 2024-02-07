@@ -1,11 +1,49 @@
 import 'dart:async';
 // import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'my_app_theme.dart';
 
 class Helpers {
+  static Future<bool> verifyInternet() async {
+    var connectivityResult = await (Connectivity().checkConnectivity());
+    if (connectivityResult == ConnectivityResult.mobile) {
+      return true;
+    } else if (connectivityResult == ConnectivityResult.wifi) {
+      return true;
+    }
+    return false;
+  }
+  static createErrorSnackBar(BuildContext context, String message) {
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      duration: const Duration(seconds: 3),
+      backgroundColor: Colors.red,
+      content: Text(
+        message,
+        style: const TextStyle(
+            fontSize: 12.0,
+            fontStyle: FontStyle.normal,
+            color: Colors.white,
+            fontWeight: FontWeight.w400),
+      ),
+    ));
+  }
+  static showValidationSnackBar(BuildContext context, String message) {
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      duration: const Duration(seconds: 1),
+      backgroundColor: Colors.green,
+      content: Text(
+        message,
+        style:  TextStyle(
+            fontSize: 12.0,
+            fontStyle: FontStyle.normal,
+            color: Colors.white,
+            fontWeight: FontWeight.w400),
+      ),
+    ));
+  }
   static OverlayEntry overlayLoader(context) {
     OverlayEntry loader = OverlayEntry(builder: (context) {
       final size = MediaQuery.of(context).size;
@@ -57,18 +95,7 @@ class Helpers {
         fontSize: 12.0);
   }
 
-  static createErrorSnackBar(BuildContext context, String message) {
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-      duration: const Duration(seconds: 3),
-      backgroundColor: MyAppTheme.errorColor,
-      content: Text(
-        message,
-        style: const TextStyle(
-            fontStyle: FontStyle.normal,
-            fontWeight: FontWeight.w400),
-      ),
-    ));
-  }
+
 
   /*static Future<bool> verifyInternet() async {
     var connectivityResult = await (Connectivity().checkConnectivity());

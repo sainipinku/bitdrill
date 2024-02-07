@@ -1,6 +1,9 @@
 import 'package:bitdrill/screen/dashboard/profile.dart';
-import 'package:bitdrill/screen/dashboard/report.dart';
+import 'package:bitdrill/screen/dashboard/report/report_screen.dart';
 import 'package:bitdrill/screen/dashboard/team.dart';
+import 'package:bitdrill/utils/constants.dart';
+import 'package:bitdrill/utils/my_app_theme.dart';
+import 'package:bitdrill/utils/my_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'home.dart';
@@ -19,7 +22,7 @@ class _DashBoardState extends State<DashBoard> {
   List<Widget> screens = [
     Home(),
     Team(),
-    Report(),
+    ReportScreen(),
     Profile(),
   ];
   void _onItemTapped(int index) {
@@ -49,8 +52,8 @@ class _DashBoardState extends State<DashBoard> {
       child:  Scaffold(
         body: screens[selectedIndex],
         bottomNavigationBar:BottomNavigationBar(
-          items: [
-            BottomNavigationBarItem(
+          items: const [
+            /*BottomNavigationBarItem(
               icon: selectedIndex == 0 ? SvgPicture.asset(
                 'assets/icons/select_news.svg',
                 allowDrawingOutsideViewBox: true,
@@ -116,27 +119,25 @@ class _DashBoardState extends State<DashBoard> {
                 color: Colors.white,
               ),
               label: 'Profile',
-            ),
-
-
+            ),*/
+            BottomNavigationBarItem(icon: Icon(Icons.home),label: home),
+            BottomNavigationBarItem(icon: Icon(Icons.group),label: type),
+            BottomNavigationBarItem(icon: Icon(Icons.book_online),label: report),
+            BottomNavigationBarItem(icon: Icon(Icons.person),label: profile),
           ],
           currentIndex: selectedIndex,
-          backgroundColor: Colors.blue,
-          selectedLabelStyle: const TextStyle(
-            fontWeight: FontWeight.w400,
-            height: 1.5,
-            fontSize: 13,
-            color: Colors.black45,
-          ),
+          backgroundColor: MyAppTheme.lightBlueColor,
+          selectedLabelStyle: MyStyles.black14BoldStyle,
           type: BottomNavigationBarType.fixed,
-          unselectedLabelStyle: const TextStyle(
-            fontWeight: FontWeight.w400,
-            height: 1.5,
-            fontSize: 13,
-            color: Colors.white,
+          unselectedLabelStyle: MyStyles.black12BoldStyle,
+          selectedItemColor: MyAppTheme.blackColor,
+          unselectedItemColor: MyAppTheme.brownColor,
+          selectedIconTheme: IconThemeData(
+            color: MyAppTheme.blackColor
           ),
-          selectedItemColor: Colors.black45,
-          unselectedItemColor: Colors.white,
+          unselectedIconTheme: IconThemeData(
+              color: MyAppTheme.brownColor
+          ),
           onTap: _onItemTapped,
         ),
       ),

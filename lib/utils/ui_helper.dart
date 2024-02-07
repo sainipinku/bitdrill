@@ -153,13 +153,11 @@ backBtn({
       },
       child: Container(
         decoration: BoxDecoration(
-          color: MyAppTheme.containerFillingColor,
+          color: Colors.transparent,
           borderRadius: BorderRadius.circular(10)
         ),
-          padding: EdgeInsets.all(8),
-          child: svgImage(
-              img: MyIcons.backArrowIc,
-          )));
+          padding: const EdgeInsets.all(8),
+          child: Icon(Icons.arrow_back,color: MyAppTheme.whiteColor,)));
 }
 
 settingTile({VoidCallback? onTap, required String title, Widget? secondWidget}) {
@@ -232,20 +230,53 @@ mainBtn({
     onTap: onTap,
     child: Container(
       //height: height ?? 56,
-      padding: EdgeInsets.symmetric(vertical: (1 >700)?10:18),
+      padding: const EdgeInsets.symmetric(vertical: (1 >700)?10:18),
       width: width ?? double.infinity,
       alignment: Alignment.center,
-      margin: EdgeInsets.symmetric(vertical: 10),
+      margin: const EdgeInsets.symmetric(vertical: 10),
       decoration : BoxDecoration(
-        borderRadius: BorderRadius.circular(20),
-        color: MyAppTheme.blackLightColor
+        borderRadius: BorderRadius.circular(10),
+        color: MyAppTheme.brownColor
       ),
       child: (icon != null) ?
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
             white16BoldText(text),
-            SizedBox(width: 5,),
+            const SizedBox(width: 5,),
+            icon,
+          ],)
+          :white16BoldText(text),
+    ),
+  );
+}
+
+
+secondaryBtn({
+  required String text,
+  required VoidCallback onTap,
+  double? height,
+  double? width,
+  Widget? icon,
+}) {
+  return GestureDetector(
+    onTap: onTap,
+    child: Container(
+      //height: height ?? 56,
+      padding: const EdgeInsets.symmetric(vertical: (1 >700)?10:18),
+      width: width ?? double.infinity,
+      alignment: Alignment.center,
+      margin: const EdgeInsets.symmetric(vertical: 10),
+      decoration : BoxDecoration(
+        borderRadius: BorderRadius.circular(10),
+        color: MyAppTheme.brownColor
+      ),
+      child: (icon != null) ?
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+            white16BoldText(text),
+            const SizedBox(width: 5,),
             icon,
           ],)
           :white16BoldText(text),
@@ -593,11 +624,31 @@ Text black16Text(String text) {
     style: MyStyles.black16BoldStyle,
   );
 }
+Text black30Text(String text) {
+  return Text(
+    text,
+    style: MyStyles.black30BoldStyle,
+  );
+}
+
+Text black20Text(String text) {
+  return Text(
+    text,
+    style: MyStyles.black20BoldStyle,
+  );
+}
 
 Text black14Text(String text) {
   return Text(
     text,
     style: MyStyles.black14BoldStyle,
+  );
+}
+
+Text black12Text(String text) {
+  return Text(
+    text,
+    style: MyStyles.black12BoldStyle,
   );
 }
 

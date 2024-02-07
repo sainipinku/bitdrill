@@ -1,6 +1,9 @@
 
 import 'package:bitdrill/locator.dart';
 import 'package:bitdrill/providers/auth_provider.dart';
+
+import 'package:bitdrill/utils/my_app_theme.dart';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

@@ -10,51 +10,52 @@ import '../ui_helper.dart';
 
 
 
-// Widget phoneTextField ( {required TextEditingController controller , String? svgIcon, EdgeInsets? scrollPadding}) {
-//   return TextFormField(
-//
-//       //style: MyStyles.black18TextLight,
-//       scrollPadding: (scrollPadding == null) ? EdgeInsets.zero : scrollPadding,
-//       controller: controller,
-//       keyboardType: TextInputType.number,
-//       validator: (phone) {
-//         if(phone!.isEmpty){
-//           return 'Please enter a phone number';
-//         }else{
-//           return null;
-//         }
-//       },
-//       decoration: InputDecoration(
-//         prefixIcon:  Padding(
-//           padding: EdgeInsets.all(8),
-//           child: SvgPicture.asset(MyIcons.phoneIc,height: 20,width: 20,),
-//         ) ,
-//         // contentPadding: const EdgeInsets.all(12),
-//         hintText: enterPhoneNumber,
-//         enabledBorder: OutlineInputBorder(
-//             borderSide: BorderSide(
-//                 color: MyAppTheme.hintTextColor),
-//             borderRadius: BorderRadius.all(
-//                 Radius.circular(11))),
-//         //hintStyle: ,
-//         errorBorder: OutlineInputBorder(
-//             borderSide: BorderSide(
-//                 color: MyAppTheme.errorColor),
-//             borderRadius: BorderRadius.all(
-//                 Radius.circular(11))
-//         ),
-//         focusedErrorBorder: OutlineInputBorder(
-//             borderSide: BorderSide(
-//                 color: MyAppTheme.errorColor),
-//             borderRadius:  BorderRadius.all(
-//                 Radius.circular(11))
-//         ),
-//         focusedBorder: OutlineInputBorder(
-//             borderSide: BorderSide(
-//                 color: MyAppTheme.hintTextColor),
-//             borderRadius: BorderRadius.circular(11)),
-//       ));
-// }
+Widget phoneTextField ( {
+  required TextEditingController controller ,
+  String? svgIcon,
+  Icon? prefixIcon,
+  EdgeInsets? scrollPadding}) {
+  return TextFormField(
+
+      //style: MyStyles.black18TextLight,
+      scrollPadding: (scrollPadding == null) ? EdgeInsets.zero : scrollPadding,
+      controller: controller,
+      keyboardType: TextInputType.number,
+      validator: (phone) {
+        if(phone!.isEmpty){
+          return 'Please enter a phone number';
+        }else{
+          return null;
+        }
+      },
+      decoration: InputDecoration(
+        prefixIcon: (svgIcon != null) ? svgImage(img: svgIcon) : null,
+        // contentPadding: const EdgeInsets.all(12),
+        hintText: enterPhoneText,
+        enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(
+                color: MyAppTheme.hintTextColor),
+            borderRadius: BorderRadius.all(
+                Radius.circular(11))),
+        //hintStyle: ,
+        errorBorder: OutlineInputBorder(
+            borderSide: BorderSide(
+                color: MyAppTheme.errorColor),
+            borderRadius: BorderRadius.all(
+                Radius.circular(11))
+        ),
+        focusedErrorBorder: OutlineInputBorder(
+            borderSide: BorderSide(
+                color: MyAppTheme.errorColor),
+            borderRadius:  BorderRadius.all(
+                Radius.circular(11))
+        ),
+        focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(
+                color: MyAppTheme.hintTextColor),
+            borderRadius: BorderRadius.circular(11)),
+      ));
+}
 
 Widget emailTextField ( {required TextEditingController controller , String? svgIcon, EdgeInsets? scrollPadding}) {
   return TextFormField(
@@ -105,40 +106,46 @@ Widget emailTextField ( {required TextEditingController controller , String? svg
 
       ));
 }
+class PasswordField extends StatefulWidget {
+  const PasswordField({
+    required this.fieldKey,
+    required this.prefixIcon,
+    required this.hintText,
+    required this.labelText,
+    required this.helperText,
+    required this.onSaved,
+    required this.validator,
+    required this.onFieldSubmitted,
 
-Widget passwordTextField ( {required TextEditingController controller ,
-  String? hintText ,
-  VoidCallback? onEyeTap,
-  bool isObscureBtnVisible =true,
-  String? svgIcon,
-  Icon? prefixIcon,
-  EdgeInsets? scrollPadding,
-  bool isObscureText = false}) {
-  return TextFormField(
-      //style: MyStyles.black18TextLight,
-      //scrollPadding: (scrollPadding == null) ? EdgeInsets.zero : scrollPadding,
-      controller: controller,
-      validator: (value) {
-        if(value!.isEmpty){
-          return 'Please fill password';
-        }else if(value.length < 6){
-          return "Password must contain six Characters";
-        }else{
-          return null;
-        }
-      },
-      obscureText: isObscureText,
-      obscuringCharacter: '*',
-      style: MyStyles.black14BoldStyle,
-      decoration: InputDecoration(
-        suffixIcon:(isObscureBtnVisible)? GestureDetector(
-          onTap: onEyeTap,
-          child: const Icon(Icons.remove_red_eye_rounded),
-        ):null,
-        // contentPadding: const EdgeInsets.all(12),
-        prefixIcon: prefixIcon,
-        hintText: hintText ?? '*************',
+  });
 
+  final Key fieldKey;
+  final Icon? prefixIcon;
+  final String hintText;
+  final String labelText;
+  final String helperText;
+  final FormFieldSetter<String> onSaved;
+  final FormFieldValidator<String> validator;
+  final ValueChanged<String> onFieldSubmitted;
+
+  @override
+  _PasswordFieldState createState() => new _PasswordFieldState();
+}
+
+class _PasswordFieldState extends State<PasswordField> {
+  bool _obscureText = true;
+
+  @override
+  Widget build(BuildContext context) {
+    return  TextFormField(
+      key: widget.fieldKey,
+      obscureText: _obscureText,
+      maxLength: 8,
+      onSaved: widget.onSaved,
+      validator: widget.validator,
+      onFieldSubmitted: widget.onFieldSubmitted,
+      decoration:  InputDecoration(
+        prefixIcon: widget.prefixIcon,
         disabledBorder: OutlineInputBorder(
             borderSide: BorderSide(
                 color: MyAppTheme.blackLightColor),
@@ -166,7 +173,80 @@ Widget passwordTextField ( {required TextEditingController controller ,
             borderSide: BorderSide(
                 color: MyAppTheme.blackLightColor),
             borderRadius: BorderRadius.circular(5)),
-      ));
+        suffixIcon:  GestureDetector(
+          onTap: () {
+            setState(() {
+              _obscureText = !_obscureText;
+            });
+          },
+          child:
+           Icon(_obscureText ? Icons.visibility : Icons.visibility_off),
+        ),
+      ),
+    );
+  }
+}
+Widget passwordTextField ( {required TextEditingController controller ,
+  String? hintText ,
+  VoidCallback? onEyeTap,
+  bool isObscureBtnVisible =true,
+  String? svgIcon,
+  Icon? prefixIcon,
+  EdgeInsets? scrollPadding,
+  bool isObscureText = false}) {
+  return TextFormField(
+      //style: MyStyles.black18TextLight,
+      //scrollPadding: (scrollPadding == null) ? EdgeInsets.zero : scrollPadding,
+      controller: controller,
+      validator: (value) {
+        if(value!.isEmpty){
+          return 'Please fill password';
+        }else if(value.length < 6){
+          return "Password must contain six Characters";
+        }else{
+          return null;
+        }
+      },
+      obscureText: isObscureText,
+      obscuringCharacter: '*',
+      style: MyStyles.black14BoldStyle,
+      decoration: InputDecoration(
+        suffixIcon:(isObscureBtnVisible)? GestureDetector(
+          onTap: onEyeTap,
+          child:  Icon(isObscureText ? Icons.visibility : Icons.visibility_off),
+        ):null,
+        // contentPadding: const EdgeInsets.all(12),
+        prefixIcon: prefixIcon,
+        hintText: hintText ?? '*************',
+        disabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(
+                color: MyAppTheme.blackLightColor),
+            borderRadius: const BorderRadius.all(
+                Radius.circular(5))),
+        enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(
+                color: MyAppTheme.blackLightColor),
+            borderRadius: const BorderRadius.all(
+                Radius.circular(5))),
+        hintStyle: MyStyles.lightBlack14RegularStyle,
+        errorBorder: OutlineInputBorder(
+            borderSide: BorderSide(
+                color: MyAppTheme.errorColor),
+            borderRadius: const BorderRadius.all(
+                Radius.circular(5))
+        ),
+        focusedErrorBorder: OutlineInputBorder(
+            borderSide: BorderSide(
+                color: MyAppTheme.blackLightColor),
+            borderRadius:  const BorderRadius.all(
+                Radius.circular(5))
+        ),
+        focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(
+                color: MyAppTheme.blackLightColor),
+            borderRadius: BorderRadius.circular(5)),
+      )
+  );
 }
 
 /*

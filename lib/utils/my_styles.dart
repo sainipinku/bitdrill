@@ -190,9 +190,22 @@ class MyStyles {
       fontWeight: MyFontWeight.bold,
       fontSize: 16,
       color: MyAppTheme.blackColor);
+  static TextStyle black30BoldStyle =  GoogleFonts.quicksand(
+      fontWeight: MyFontWeight.bold,
+      fontSize: 30,
+      color: MyAppTheme.blackColor);
+  static TextStyle black20BoldStyle =  GoogleFonts.quicksand(
+      fontWeight: MyFontWeight.bold,
+      fontSize: 20,
+      color: MyAppTheme.blackColor);
   static TextStyle black14BoldStyle =  GoogleFonts.quicksand(
       fontWeight: MyFontWeight.bold,
       fontSize: 14,
+      color: MyAppTheme.blackColor);
+
+  static TextStyle black12BoldStyle =  GoogleFonts.quicksand(
+      fontWeight: MyFontWeight.bold,
+      fontSize: 12,
       color: MyAppTheme.blackColor);
 
 

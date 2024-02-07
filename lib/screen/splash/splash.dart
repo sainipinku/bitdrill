@@ -1,4 +1,5 @@
 import 'package:bitdrill/screen/auth/signup.dart';
+import 'package:bitdrill/utils/my_images.dart';
 import 'package:flutter/material.dart';
 
 import '../auth/signin.dart';
@@ -21,8 +22,15 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Container(color: Colors.red,height: 50,width: 50,),
+      body: SizedBox(
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height,
+        child: Center(
+            child:  CircleAvatar(
+              foregroundImage: AssetImage(MyImages.thisProject),
+              radius: MediaQuery.of(context).size.height*0.10,
+            ),
+        ),
       ),
     );
   }
