@@ -29,9 +29,9 @@ class Dashboard {
   String? memberName;
   String? whatsappSupport;
   String? dOJ;
-  Null? withdrawalWalletAddress;
-  Null? otherwalletaddress;
-  Null? dOA;
+  var withdrawalWalletAddress;
+  var otherwalletaddress;
+  var dOA;
   String? directCountActiveTeam;
   String? directCountDeactiveTeam;
   String? refferlink;

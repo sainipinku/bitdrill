@@ -81,6 +81,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.6"
+  curved_progress_bar:
+    dependency: "direct main"
+    description:
+      name: curved_progress_bar
+      sha256: ccd6eee8d89901c81ddea28cd96220dd8e0d8a294cc4e87174556bda87a5a1f7
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.2"
   custom_searchable_dropdown:
     dependency: "direct main"
     description:
@@ -134,6 +142,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.3"
+  flutter_seekbar:
+    dependency: "direct main"
+    description:
+      name: flutter_seekbar
+      sha256: b4fc58e2464875e50d7387d77f5374b0a774c5912dc8cd28ce15f0d7c19cda83
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.1"
   flutter_svg:
     dependency: "direct main"
     description:

@@ -1,6 +1,10 @@
+import 'dart:async';
+
 import 'package:bitdrill/screen/auth/signup.dart';
+import 'package:bitdrill/screen/dashboard/dashboard.dart';
 import 'package:bitdrill/utils/my_images.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../auth/signin.dart';
 
@@ -12,10 +16,26 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  void navigationToScreen() async{
+    try {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      String userToken = prefs.getString('user_msrno') ?? '';
+      if(userToken.isNotEmpty){
+        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const DashBoard(),));
+      }else {
+        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const SignIn(),));
+      }
 
+    } on Exception catch (e) {
+    }
+  }
+  _startTime() async {
+    var duration = const Duration(seconds: 2);
+    return Timer(duration, navigationToScreen);
+  }
   @override
   void initState() {
-    Future.delayed(const Duration(seconds: 2),() => Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const SignIn(),)));
+    _startTime();
     super.initState();
   }
 

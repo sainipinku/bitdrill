@@ -48,6 +48,8 @@ dependencies:
   pinput: ^3.0.1
   google_fonts: ^6.1.0
   custom_searchable_dropdown: ^2.1.1
+  flutter_seekbar: ^1.0.1
+  curved_progress_bar: ^1.0.2
 
 
 dev_dependencies:

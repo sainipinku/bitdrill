@@ -30,6 +30,21 @@ class Helpers {
       ),
     ));
   }
+
+  static createSnackBar(BuildContext context, String message) {
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      duration: const Duration(seconds: 3),
+      backgroundColor: Colors.green,
+      content: Text(
+        message,
+        style: const TextStyle(
+            fontSize: 12.0,
+            fontStyle: FontStyle.normal,
+            color: Colors.white,
+            fontWeight: FontWeight.w400),
+      ),
+    ));
+  }
   static showValidationSnackBar(BuildContext context, String message) {
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
       duration: const Duration(seconds: 1),

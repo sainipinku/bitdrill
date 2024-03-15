@@ -1,6 +1,7 @@
 
 import 'package:bitdrill/locator.dart';
 import 'package:bitdrill/providers/auth_provider.dart';
+import 'package:bitdrill/providers/home_provider.dart';
 
 import 'package:bitdrill/utils/my_app_theme.dart';
 
@@ -20,10 +21,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(providers: [
-    /*  ChangeNotifierProvider(create: (context) => locator<ScoreCardProvider>()),*/
+      ChangeNotifierProvider(create: (context) => locator<HomeProvider>()),
       ChangeNotifierProvider(create: (context) => AuthProvider(),builder: (context, child) {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
+          theme: ThemeData(
+            scaffoldBackgroundColor: MyAppTheme.bgColor,
+            useMaterial3: false,
+          ),
           home: SplashScreen(),
         );
       },)

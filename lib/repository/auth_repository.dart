@@ -36,31 +36,7 @@ Future<LoginModel> authLogin(BuildContext context,String customerid,String passw
   }
 
 }
-Future<HomeModel> homeData(BuildContext context) async
-{
-  OverlayEntry loader = Helpers.overlayLoader(context);
-  Overlay.of(context)!.insert(loader);
-  var url;
-  url = Uri.parse('https://api.bitdrill.world/Service.svc/dashboard?msrno=2');
-  final http.Response response = await http.get(
-    url,
-    headers: <String, String>{
-      'Content-Type': 'application/json; charset=UTF-8',
-    },
-  );
-  if (response.statusCode == 200) {
-    print('status true ==${response.body}');
-    Helpers.hideLoader(loader);
-    return  HomeModel.fromJson(json.decode(response.body));
 
-  } else {
-    print('status flause');
-    Helpers.hideLoader(loader);
-    throw new Exception(response.body);
-
-  }
-
-}
 Future<RegisterModel> authRegister(BuildContext context,String sponsorid,String membername,String mobile,String email,String pass,String countryid) async
 {
   OverlayEntry loader = Helpers.overlayLoader(context);

@@ -6,7 +6,7 @@ import 'package:bitdrill/model/login_model.dart';
 import 'package:bitdrill/model/register_model.dart';
 import 'package:bitdrill/repository/auth_repository.dart';
 import 'package:bitdrill/screen/dashboard/dashboard.dart';
-import 'package:bitdrill/screen/dashboard/home.dart';
+
 import 'package:bitdrill/utils/helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -23,7 +23,8 @@ class AuthProvider extends ChangeNotifier {
     authLogin(context,customerid,password)
         .then((response) {
           loginModel = response;
-          SharedPrefs.setToken(loginModel!.msrno!);
+          SharedPrefs.setMSRNO(loginModel!.msrno!);
+          SharedPrefs.setMemberId(loginModel!.memberid!);
           Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const DashBoard(),));
           notifyListeners();
           print("response============${loginModel!.title}");
@@ -34,8 +35,7 @@ class AuthProvider extends ChangeNotifier {
          .then((response) {
        registerModel = response;
        if(registerModel!.status == 1){
-
-         Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const Home(),));
+         Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const DashBoard(),));
          notifyListeners();
        }else {
          Helpers.createErrorSnackBar(context,'invalid cerdiction');

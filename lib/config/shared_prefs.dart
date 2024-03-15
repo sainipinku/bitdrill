@@ -4,38 +4,18 @@ import 'package:shared_preferences/shared_preferences.dart';
 class SharedPrefs {
 
   /////////// Setters/////////////
-  static setToken(String token) async {
+  static setMSRNO(String user_msrno) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setString('user_token', token);
+    prefs.setString('user_msrno', user_msrno);
   }
 
-  static setLoginType(int role) async {
+  static setMemberId(String memberid) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setInt('user_type', role);
+    prefs.setString('user_memberid', memberid);
   }
   static setUserId(int userId) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setInt('user_id', userId);
-  }
-  static setChildUUID(String uuid) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setString('child_uuid', uuid);
-  }
-  static setLoginStatus(String status) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setString('logged_in', status);
-  }
-  static setProfileImage(String status) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setString('pro_pic', status);
-  }
-  static setName(String status) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setString('name', status);
-  }
-  static setEmail(String status) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setString('email', status);
   }
   static setTrialFirstTimeUser(bool status) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -43,34 +23,17 @@ class SharedPrefs {
   }
 
   //////////Getters////////////////
-  static Future<String> getToken() async {
+  static Future<String> getMSRNO() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    return prefs.getString('user_token') ?? " ";
+    return prefs.getString('user_msrno') ?? " ";
   }
-  static Future<int> getLoginType() async {
+  static Future<String> getMemberId() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    return prefs.getInt('user_type') ?? -1;
+    return prefs.getString('user_type') ?? "";
   }
   static Future<int> getUserId() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     return prefs.getInt('user_id') ?? -1;
-  }
-  static Future<String> getLoginStatus() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    return prefs.getString('logged_in') ?? "";
-  }
-  static Future<String> getChildUUID() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    return prefs.getString('child_uuid') ?? "";
-  }
-
-  static Future<String> getProfileImage() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    return prefs.getString('pro_pic') ?? "";
-  }
-  static Future<String> getName() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    return prefs.getString('name') ?? "";
   }
   static Future<String> getEmail() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
