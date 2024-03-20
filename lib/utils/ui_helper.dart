@@ -134,8 +134,8 @@ mainBtn({
       margin: const EdgeInsets.symmetric(vertical: 10),
       decoration : BoxDecoration(
         borderRadius: BorderRadius.circular(borderRadius ?? 10),
-        color: focus ?MyAppTheme.brownColor :Colors.transparent,
-          border: Border.all(color: MyAppTheme.brownColor)
+        color: focus ?MyAppTheme.logoColor :Colors.transparent,
+          border: Border.all(color: MyAppTheme.logoColor)
       ),
       child: (icon != null) ?
           Row(
@@ -301,12 +301,21 @@ Text black14Text(String text) {
   );
 }
 
+Text white14Text(String text) {
+  return Text(
+    text,
+    style: MyStyles.white14boldStyle,
+  );
+}
+
 Text black12Text(String text) {
   return Text(
     text,
-    style: MyStyles.black12BoldStyle,
+    style: MyStyles.white12LightStyle,
   );
 }
+
+
 
 
 ///// black light
@@ -315,13 +324,13 @@ Text black12Text(String text) {
 Text blackLight14Text(String text) {
   return Text(
     text,
-    style: MyStyles.lightBlack14RegularStyle,
+    style: MyStyles.white14lightStyle,
   );
 }
 Text blackLight12Text(String text) {
   return Text(
     text,
-    style: MyStyles.lightBlack12RegularStyle,
+    style: MyStyles.white12LightStyle,
   );
 }
 

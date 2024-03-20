@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:bitdrill/config/shared_prefs.dart';
+import 'package:bitdrill/dilog_box/register_dilogbox.dart';
 import 'package:bitdrill/model/country_model.dart';
 import 'package:bitdrill/model/login_model.dart';
 import 'package:bitdrill/model/register_model.dart';
@@ -35,7 +36,13 @@ class AuthProvider extends ChangeNotifier {
          .then((response) {
        registerModel = response;
        if(registerModel!.status == 1){
-         Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const DashBoard(),));
+         showDialog(
+             barrierDismissible: true,
+             context: context,
+             builder: (_) =>  RegisterDilogBox(registerModel: registerModel!,)
+         ).then((val) {
+
+         });
          notifyListeners();
        }else {
          Helpers.createErrorSnackBar(context,'invalid cerdiction');

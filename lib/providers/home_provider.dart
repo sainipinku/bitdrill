@@ -1,6 +1,8 @@
+import 'package:bitdrill/dilog_box/showdilogbox.dart';
 import 'package:bitdrill/model/ActivationModel.dart';
 import 'package:bitdrill/model/DepositModel.dart';
 import 'package:bitdrill/model/DepositeFundsModel.dart';
+import 'package:bitdrill/model/MessageModel.dart';
 import 'package:bitdrill/model/WithDrawModel.dart';
 import 'package:bitdrill/model/home_model.dart';
 import 'package:bitdrill/repository/auth_repository.dart';
@@ -16,6 +18,7 @@ class HomeProvider extends ChangeNotifier {
   ActivationModel? activationModel;
   DepositeFundsModel? depositeFundsModel;
   WithDrawModel? withDrawModel;
+  MessageModel? messageModel;
   void getHomeData(BuildContext context) async {
     try {
       Helpers.verifyInternet().then((intenet) {
@@ -40,6 +43,29 @@ class HomeProvider extends ChangeNotifier {
             withDrawModel = response;
             Navigator.pop(context);
             Helpers.createSnackBar(context, withDrawModel!.msg!);
+            notifyListeners();
+          });
+        } else {
+          Helpers.createErrorSnackBar(context, "Please check your internet connection");
+        }
+      });
+    } catch (err) {
+      print('Something went wrong');
+    }
+  }
+  void sendCenterHomeData(BuildContext context) async {
+    try {
+      Helpers.verifyInternet().then((intenet) {
+        if (intenet) {
+          centerHomeData(context).then((response) {
+            messageModel = response;
+            showDialog(
+                barrierDismissible: true,
+                context: context,
+                builder: (_) =>  ShowDilogBox(message: messageModel!.msg!,)
+            ).then((val) {
+
+            });
             notifyListeners();
           });
         } else {

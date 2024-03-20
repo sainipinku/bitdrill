@@ -170,9 +170,9 @@ class MyStyles {
 
   ///////Bold
   static TextStyle lightBlack14BoldStyle =  GoogleFonts.quicksand(
-      fontWeight: MyFontWeight.bold,
+      fontWeight: MyFontWeight.light,
       fontSize: 14,
-      color: MyAppTheme.blackTextColor);
+      color: MyAppTheme.whiteColor);
 
   ///////Regular
   static TextStyle lightBlack12RegularStyle =  GoogleFonts.quicksand(
@@ -183,7 +183,7 @@ class MyStyles {
   static TextStyle lightBlack14RegularStyle =  GoogleFonts.quicksand(
       fontWeight: MyFontWeight.regular,
       fontSize: 14,
-      color: MyAppTheme.blackTextColor);
+      color: MyAppTheme.whiteColor);
   /////////////////////// Brown///////////////
 
   static TextStyle brownBlack14RegularStyle =  GoogleFonts.quicksand(
@@ -205,9 +205,18 @@ class MyStyles {
   static TextStyle black20BoldStyle =  GoogleFonts.quicksand(
       fontWeight: MyFontWeight.bold,
       fontSize: 20,
+      color: MyAppTheme.whiteColor);
+
+  static TextStyle blackk20BoldStyle =  GoogleFonts.quicksand(
+      fontWeight: MyFontWeight.bold,
+      fontSize: 20,
       color: MyAppTheme.blackColor);
 
   static TextStyle black16BoldStyle =  GoogleFonts.quicksand(
+      fontWeight: MyFontWeight.bold,
+      fontSize: 16,
+      color: MyAppTheme.whiteColor);
+  static TextStyle blackk16BoldStyle =  GoogleFonts.quicksand(
       fontWeight: MyFontWeight.bold,
       fontSize: 16,
       color: MyAppTheme.blackColor);
@@ -219,7 +228,12 @@ class MyStyles {
   static TextStyle black14BoldStyle =  GoogleFonts.quicksand(
       fontWeight: MyFontWeight.bold,
       fontSize: 14,
-      color: MyAppTheme.blackColor);
+      color: MyAppTheme.whiteColor);
+
+  static TextStyle white14BoldStyle =  GoogleFonts.quicksand(
+      fontWeight: MyFontWeight.bold,
+      fontSize: 14,
+      color: MyAppTheme.whiteColor);
 
   static TextStyle black12BoldStyle =  GoogleFonts.quicksand(
       fontWeight: MyFontWeight.bold,

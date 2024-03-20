@@ -4,6 +4,7 @@ import 'package:bitdrill/apis/apis.dart';
 import 'package:bitdrill/model/ActivationModel.dart';
 import 'package:bitdrill/model/DepositModel.dart';
 import 'package:bitdrill/model/DepositeFundsModel.dart';
+import 'package:bitdrill/model/MessageModel.dart';
 import 'package:bitdrill/model/PackegaIdModel.dart';
 import 'package:bitdrill/model/WithDrawModel.dart';
 import 'package:bitdrill/model/country_model.dart';
@@ -99,6 +100,34 @@ Future<WithDrawModel> withdrawalHomeData(BuildContext context,String amount) asy
 
 }
 
+
+Future<MessageModel> centerHomeData(BuildContext context) async
+{
+  OverlayEntry loader = Helpers.overlayLoader(context);
+  Overlay.of(context)!.insert(loader);
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  String userToken = prefs.getString('user_msrno') ?? '';
+  var url;
+  url = Uri.parse('https://api.bitdrill.world/Service.svc/mining?msrno=$userToken&packid=1');
+  final http.Response response = await http.get(
+    url,
+    headers: <String, String>{
+      'Content-Type': 'application/json; charset=UTF-8',
+    },
+  );
+  if (response.statusCode == 200) {
+    print('status true ==${response.body}');
+    Helpers.hideLoader(loader);
+    return  MessageModel.fromJson(json.decode(response.body));
+
+  } else {
+    print('status flause');
+    Helpers.hideLoader(loader);
+    throw new Exception(response.body);
+
+  }
+
+}
 
 Future<DepositeFundsModel> depositHomeData(BuildContext context,String request,String transaciton,String remark) async
 {

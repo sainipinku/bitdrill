@@ -1,6 +1,7 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import '../constants.dart';
 import '../helper.dart';
 import '../my_app_theme.dart';
@@ -213,37 +214,37 @@ Widget passwordTextField ( {required TextEditingController controller ,
       decoration: InputDecoration(
         suffixIcon:(isObscureBtnVisible)? GestureDetector(
           onTap: onEyeTap,
-          child:  Icon(isObscureText ? Icons.visibility : Icons.visibility_off),
+          child:  Icon(isObscureText ? Icons.visibility : Icons.visibility_off,color: Colors.white,),
         ):null,
         // contentPadding: const EdgeInsets.all(12),
         prefixIcon: prefixIcon,
         hintText: hintText ?? '*************',
         disabledBorder: OutlineInputBorder(
             borderSide: BorderSide(
-                color: MyAppTheme.blackLightColor),
+                color: MyAppTheme.cardBgSecColor),
             borderRadius: const BorderRadius.all(
                 Radius.circular(5))),
         enabledBorder: OutlineInputBorder(
             borderSide: BorderSide(
-                color: MyAppTheme.blackLightColor),
+                color: MyAppTheme.cardBgSecColor),
             borderRadius: const BorderRadius.all(
                 Radius.circular(5))),
         hintStyle: MyStyles.lightBlack14RegularStyle,
         errorBorder: OutlineInputBorder(
             borderSide: BorderSide(
-                color: MyAppTheme.errorColor),
+                color: MyAppTheme.cardBgSecColor),
             borderRadius: const BorderRadius.all(
                 Radius.circular(5))
         ),
         focusedErrorBorder: OutlineInputBorder(
             borderSide: BorderSide(
-                color: MyAppTheme.blackLightColor),
+                color: MyAppTheme.cardBgSecColor),
             borderRadius:  const BorderRadius.all(
                 Radius.circular(5))
         ),
         focusedBorder: OutlineInputBorder(
             borderSide: BorderSide(
-                color: MyAppTheme.blackLightColor),
+                color: MyAppTheme.cardBgSecColor),
             borderRadius: BorderRadius.circular(5)),
       )
   );
@@ -311,7 +312,62 @@ Widget customTextField ( {
             borderRadius: BorderRadius.circular(5)),
       ));
 }*/
+Widget phoneNumberTextfield({required TextEditingController controller,EdgeInsets? scrollPadding}){
+  return TextFormField(
+      cursorColor: MyAppTheme.whiteColor,
+      style: MyStyles.white16BoldStyle,
+      scrollPadding: (scrollPadding == null) ? EdgeInsets.zero : scrollPadding,
+      controller: controller,
+      enableInteractiveSelection: false,
+      inputFormatters: [
+        LengthLimitingTextInputFormatter(10),
+      ],
+      keyboardType: TextInputType.number,
+      validator: (phone) {
+        if(phone!.length == 10){
+          return null;
+        }else{
+          return 'Enter a valid Phone Number';
+        }
+      },
+      decoration: InputDecoration(
+        contentPadding: const EdgeInsets.all(12),
+        //counter: const Offstage(),
+        prefixIcon:  Icon(
+          Icons.call,
+          color: MyAppTheme.whiteColor,
+          size: 22,
+        ),
+        hintText: '+91-XXXXX-XXXXX',
+        fillColor:  MyAppTheme.cardBgSecColor,
 
+        errorBorder: OutlineInputBorder(
+            borderSide: BorderSide(
+                color: MyAppTheme.cardBgSecColor),
+            borderRadius:
+            BorderRadius.circular(10)
+        ),
+
+        enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(
+                color: MyAppTheme.cardBgSecColor),
+            borderRadius:
+            BorderRadius.circular(10)),
+
+        hintStyle: MyStyles.white14lightStyle,
+        focusedErrorBorder: OutlineInputBorder(
+            borderSide: BorderSide(
+                color: MyAppTheme.cardBgSecColor),
+            borderRadius:
+            BorderRadius.circular(10)
+        ),
+        focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(
+                color: MyAppTheme.cardBgSecColor),
+            borderRadius:
+            BorderRadius.circular(10)),
+      ));
+}
 Widget customTextField({
   required TextEditingController controller ,
   Icon? suffixIcon,
@@ -325,7 +381,6 @@ Widget customTextField({
       textCapitalization: TextCapitalization.words,
       controller: controller,
       keyboardType: textInputType ?? TextInputType.text,
-
       decoration: InputDecoration(
         prefixIcon: prefixIcon,
         suffixIcon: suffixIcon,
@@ -334,29 +389,29 @@ Widget customTextField({
         hintStyle: MyStyles.lightBlack14RegularStyle,
         enabledBorder: OutlineInputBorder(
             borderSide: BorderSide(
-                color: MyAppTheme.blackTextColor),
+                color: MyAppTheme.cardBgSecColor),
             borderRadius: const BorderRadius.all(
                 Radius.circular(5))),
         disabledBorder: OutlineInputBorder(
             borderSide: BorderSide(
-                color: MyAppTheme.blackTextColor),
+                color: MyAppTheme.cardBgSecColor),
             borderRadius: const BorderRadius.all(
                 Radius.circular(5))),
         errorBorder: OutlineInputBorder(
             borderSide: BorderSide(
-                color: MyAppTheme.blackTextColor),
+                color: MyAppTheme.cardBgSecColor),
             borderRadius: const BorderRadius.all(
                 Radius.circular(5))
         ),
         focusedErrorBorder: OutlineInputBorder(
             borderSide: BorderSide(
-                color: MyAppTheme.errorColor),
+                color: MyAppTheme.cardBgSecColor),
             borderRadius:  const BorderRadius.all(
                 Radius.circular(5))
         ),
         focusedBorder: OutlineInputBorder(
             borderSide: BorderSide(
-                color: MyAppTheme.blackTextColor),
+                color: MyAppTheme.cardBgSecColor),
             borderRadius: BorderRadius.circular(5)),
       ));
 }
@@ -373,7 +428,6 @@ Widget whiteTextField({
   TextInputType? textInputType,
 }){
   return Container(
-    color: MyAppTheme.whiteColor,
     padding: const EdgeInsets.symmetric(horizontal: 8),
     child: TextFormField(
       //enabled: (disabled== null)? true : !disabled,
@@ -393,12 +447,12 @@ Widget whiteTextField({
           hintStyle: MyStyles.lightBlack14RegularStyle,
           enabledBorder: OutlineInputBorder(
               borderSide: BorderSide(
-                  color: MyAppTheme.transparent),
+                  color: MyAppTheme.cardBgSecColor),
               borderRadius: const BorderRadius.all(
                   Radius.circular(5))),
           disabledBorder: OutlineInputBorder(
               borderSide: BorderSide(
-                  color: MyAppTheme.transparent),
+                  color: MyAppTheme.cardBgSecColor),
               borderRadius: const BorderRadius.all(
                   Radius.circular(5))),
           errorBorder: OutlineInputBorder(
@@ -409,13 +463,13 @@ Widget whiteTextField({
           ),
           focusedErrorBorder: OutlineInputBorder(
               borderSide: BorderSide(
-                  color: MyAppTheme.errorColor),
+                  color: MyAppTheme.cardBgSecColor),
               borderRadius:  const BorderRadius.all(
                   Radius.circular(5))
           ),
           focusedBorder: OutlineInputBorder(
               borderSide: BorderSide(
-                  color: Colors.transparent),
+                  color: MyAppTheme.cardBgSecColor),
               borderRadius: BorderRadius.circular(5)),
         )),
   );

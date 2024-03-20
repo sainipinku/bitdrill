@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:bitdrill/screen/auth/signup.dart';
 import 'package:bitdrill/screen/dashboard/dashboard.dart';
+import 'package:bitdrill/utils/my_app_theme.dart';
 import 'package:bitdrill/utils/my_images.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -42,6 +43,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: MyAppTheme.bgColor,
       body: SizedBox(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,

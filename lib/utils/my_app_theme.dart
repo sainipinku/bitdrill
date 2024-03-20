@@ -52,14 +52,15 @@ class MyAppTheme {
 
 
   //////////////////////////Bit Drill ///////////////////////
-
+  static  Color logoColor = const Color(0xFFd2a541);
   static  Color blackColor = const Color(0xFF000000);
   static  Color brownColor = const Color(0xFF4E342E);
   static  Color whiteColor = const Color(0xFFFFFFFF);
   static  Color blackTextColor = const Color(0xFF333333);
   static  Color lightBlueColor = const Color(0xFF8bdfe8);
-  static  Color bgColor = const Color(0xffe5fafc);
   static  Color transparent = Colors.transparent;
+  static  Color bgColor = const Color(0xFF12171D);
+  static  Color cardBgSecColor = const Color(0xFF293C53);
 
 
 }

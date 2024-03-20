@@ -43,7 +43,6 @@ class _SignInState extends State<SignIn> {
             return Container(
               height: height,
               width: width,
-              color: MyAppTheme.whiteColor,
               padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 10).copyWith(top: 20),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -59,7 +58,7 @@ class _SignInState extends State<SignIn> {
                       const SizedBox(height: 30,),
                       customTextField(
                           hintText: "Enter Customer Id",
-                          controller: emailController,prefixIcon: Icon(Icons.email,color: MyAppTheme.blackColor,)),
+                          controller: emailController,prefixIcon: Icon(Icons.email,color: MyAppTheme.whiteColor,)),
                       const SizedBox(height: 6,),
                       passwordTextField(
                           hintText: "Enter Your Password",
@@ -69,7 +68,7 @@ class _SignInState extends State<SignIn> {
                               _obscureText = !_obscureText;
                             });
                           },
-                          controller: passController,prefixIcon: Icon(Icons.lock,color: MyAppTheme.blackColor,)),
+                          controller: passController,prefixIcon: Icon(Icons.lock,color: MyAppTheme.whiteColor,)),
                       const SizedBox(height: 10,),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.end,

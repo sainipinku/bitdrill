@@ -50,6 +50,7 @@ dependencies:
   custom_searchable_dropdown: ^2.1.1
   flutter_seekbar: ^1.0.1
   curved_progress_bar: ^1.0.2
+  simple_ripple_animation: ^0.0.9
 
 
 dev_dependencies:

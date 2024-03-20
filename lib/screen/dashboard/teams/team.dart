@@ -68,7 +68,6 @@ class _TeamState extends State<Team> {
                   },focus: !focus,borderRadius: 20),
                 ],
               ),
-
               Row(
                 children: [
                   Expanded(
@@ -133,7 +132,7 @@ class _TeamState extends State<Team> {
                                 Container(
                                   padding: const EdgeInsets.all(8),
                                   decoration: BoxDecoration(
-                                    color: MyAppTheme.brownColor,
+                                    color: MyAppTheme.cardBgSecColor,
                                     borderRadius: BorderRadius.circular(5),
                                   ),
                                   child: white14BoldText(

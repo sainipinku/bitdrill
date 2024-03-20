@@ -1,4 +1,7 @@
+import 'package:bitdrill/dilog_box/logout.dart';
 import 'package:bitdrill/screen/dashboard/report/withdrwal_history.dart';
+import 'package:bitdrill/utils/my_app_theme.dart';
+import 'package:bitdrill/utils/my_styles.dart';
 import 'package:flutter/material.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -48,13 +51,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
-        backgroundColor: const Color(0xffDBEEF4),
+
         body: SafeArea(
           child: Column(
               children: [
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 10),
-                  color: const Color(0xffB7DDE8),
+                  color: MyAppTheme.cardBgSecColor,
                   height: MediaQuery.sizeOf(context).height*0.15,
                   width: double.infinity,
                   child: const Row(
@@ -62,15 +65,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       Icon(
                         Icons.person,
                         size: 50,
-                        color: Colors.black,
+                        color: Colors.white,
                       ),
                       SizedBox(width: 10,),
                       Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('Shree ganeshay namah',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20),),
-                          Text('2558594',style: TextStyle(fontSize: 17),)
+                          Text('Shree ganeshay namah',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20,color: Colors.white),),
+                          Text('2558594',style: TextStyle(fontSize: 17,color: Colors.white),)
                         ],
                       )
                     ],
@@ -78,13 +81,23 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
                 const SizedBox(height: 10,),
                 Container(
-                  color: const Color(0xffB7DDE8),
+                  color: MyAppTheme.cardBgSecColor,
                   padding: const EdgeInsets.symmetric(horizontal: 10.0),
                   child: ListView.builder(
                       shrinkWrap: true,
                       itemCount: option.length,
-                      itemBuilder: (context, index) => customBtn(icon: option[index]['icon'],
-                          title: option[index]['title'] )
+                      itemBuilder: (context, index) =>
+                          customBtn(
+                              onTap: () {
+                                print('dhjdhjdhdjh');
+                                showDialog(
+                                    barrierDismissible: true,
+                                    context: context,
+                                    builder: (_) =>  LogoutDilogBox()
+                                );
+                              },
+                              icon: option[index]['icon'],
+                              title: option[index]['title'] )
                   ),
                 ),
 
@@ -191,6 +204,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     );
   }
 
+
   customBtn({
     VoidCallback? onTap,
     required Widget icon,
@@ -198,7 +212,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }){
     return InkWell(
       onTap: onTap ?? (){
-
+        LogoutDilogBox();
       },
       child: Container(
         padding: const EdgeInsets.all(10),
@@ -206,15 +220,19 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
             border: Border(
                 bottom: BorderSide(
-                    color: Colors.brown
+                    color: Colors.white
                 )
             )
         ),
         child: Row(
           children: [
-            icon,
+            Icon(
+              Icons.person,
+              size: 20,
+              color: Colors.white,
+            ),
             const SizedBox(width: 10,),
-            Text(title),
+            Text(title,style: MyStyles.white12LightStyle,),
           ],
         ),
       ),
@@ -232,7 +250,7 @@ class CustomButton extends StatelessWidget {
     required this.icon,
     required this.text,
     required this.onPressed,
-    this.backgroundColor = const Color(0xffB7DDE8),
+    this.backgroundColor = const Color(0xFFd2a541),
     this.textColor = Colors.black,
   }) : super(key: key);
 

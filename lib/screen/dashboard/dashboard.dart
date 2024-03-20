@@ -126,14 +126,14 @@ class _DashBoardState extends State<DashBoard> {
             BottomNavigationBarItem(icon: Icon(Icons.person),label: profile),
           ],
           currentIndex: selectedIndex,
-          backgroundColor: MyAppTheme.lightBlueColor,
+          backgroundColor: MyAppTheme.logoColor,
           selectedLabelStyle: MyStyles.black14BoldStyle,
           type: BottomNavigationBarType.fixed,
           unselectedLabelStyle: MyStyles.black12BoldStyle,
-          selectedItemColor: MyAppTheme.blackColor,
+          selectedItemColor: MyAppTheme.whiteColor,
           unselectedItemColor: MyAppTheme.brownColor,
           selectedIconTheme: IconThemeData(
-            color: MyAppTheme.blackColor
+            color: MyAppTheme.whiteColor
           ),
           unselectedIconTheme: IconThemeData(
               color: MyAppTheme.brownColor

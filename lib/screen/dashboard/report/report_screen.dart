@@ -54,7 +54,6 @@ class ReportScreen extends StatelessWidget {
       body: SafeArea(
         child: Container(
           height: height,
-          color: MyAppTheme.bgColor,
             padding: const EdgeInsets.symmetric(horizontal: 8.0),
             child: ListView.builder(
               shrinkWrap: true,
@@ -86,19 +85,19 @@ reportOptionContainer(
     child: Container(
       padding: const EdgeInsets.all(8),
       margin: const EdgeInsets.symmetric(vertical: 2),
-      color: MyAppTheme.lightBlueColor,
+      color: MyAppTheme.cardBgSecColor,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Row(
             children: [
-              icon ?? const Icon(Icons.book_online),
+              icon ??  Icon(Icons.book_online,color: MyAppTheme.whiteColor),
               const SizedBox(width: 10,),
               black14Text(text),
             ],
           ),
 
-          const Icon(Icons.arrow_forward_ios)
+           Icon(Icons.arrow_forward_ios,color: MyAppTheme.whiteColor,)
         ],
       ),
     ),

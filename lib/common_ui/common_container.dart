@@ -21,10 +21,7 @@ class CommonContainer extends StatelessWidget {
       child: Container(
          height: height,
          decoration: BoxDecoration(
-             color: color ?? MyAppTheme.lightBlueColor,
-           boxShadow: [
-             BoxShadow(color: MyAppTheme.greyColor,blurRadius: 3,offset: const Offset(5, 5))
-           ],
+             color: color ?? MyAppTheme.cardBgSecColor,
            borderRadius: const BorderRadius.all(Radius.circular(8),)
          ),
          child: (widget != null) ?Row(
@@ -37,8 +34,8 @@ class CommonContainer extends StatelessWidget {
                crossAxisAlignment: CrossAxisAlignment.center,
                mainAxisAlignment: MainAxisAlignment.center,
                children: [
-                 black14Text(title),
-                 black14Text(value)
+                 white14Text(title),
+                 white14Text(value)
                ],
              ),
            ],
@@ -46,8 +43,8 @@ class CommonContainer extends StatelessWidget {
            crossAxisAlignment: CrossAxisAlignment.center,
            mainAxisAlignment: MainAxisAlignment.center,
            children: [
-             black14Text(title),
-             black14Text(value)
+             white14Text(title),
+             white14Text(value)
            ],
          ),
       ),

@@ -72,7 +72,6 @@ class _SignUpState extends State<SignUp> {
         child: country.isNotEmpty ? Consumer<AuthProvider>(
           builder: (context, provider, child) {
             return Container(
-              color: MyAppTheme.whiteColor,
               height: height,
               width: width,
               padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 10).copyWith(top: 20),
@@ -88,7 +87,7 @@ class _SignUpState extends State<SignUp> {
                     customTextField(
                         hintText: "Enter Your SponsorId",
                         controller: sponsorIdController,
-                        prefixIcon: Icon(Icons.person,color: MyAppTheme.blackColor,
+                        prefixIcon: Icon(Icons.person,color: MyAppTheme.whiteColor,
                         )),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
@@ -122,14 +121,14 @@ class _SignUpState extends State<SignUp> {
                     const SizedBox(height: 6,),
                     customTextField(
                         hintText: "Enter Your Full Name",
-                        controller: nameController,prefixIcon: Icon(Icons.person,color: MyAppTheme.blackColor,)),
+                        controller: nameController,prefixIcon: Icon(Icons.person,color: MyAppTheme.whiteColor,)),
                     const SizedBox(height: 6,),
                     Container(
                       width: width,
                       margin: const EdgeInsets.only(top: 2.0),
                       decoration: BoxDecoration(
                           border: Border.all(
-                            color: Colors.black,
+                            color: MyAppTheme.cardBgSecColor,
                           ),
                           borderRadius: const BorderRadius.all(Radius.circular(5))
                       ),
@@ -141,7 +140,7 @@ class _SignUpState extends State<SignUp> {
                           labelStyle: const TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.w400,
-                            color: Colors.black,
+                            color: Colors.white,
                           ),
                           items: country,
                           label:  selectedState ?? 'Select Country',
@@ -170,13 +169,12 @@ class _SignUpState extends State<SignUp> {
                       ),
                     ),
                     const SizedBox(height: 6,),
-                    customTextField(
-                        hintText: "Enter Your Phone",
-                        controller: mobileController,prefixIcon: Icon(Icons.phone_android,color: MyAppTheme.blackColor,)),
+                    phoneNumberTextfield(
+                        controller: mobileController),
                     const SizedBox(height: 6,),
                     customTextField(
                         hintText: "Enter Your Email",
-                        controller: emailController,prefixIcon: Icon(Icons.email,color: MyAppTheme.blackColor,)),
+                        controller: emailController,prefixIcon: Icon(Icons.email,color: MyAppTheme.whiteColor,)),
                     const SizedBox(height: 6,),
                     passwordTextField(
                         hintText: "Enter Your Password",
@@ -186,7 +184,7 @@ class _SignUpState extends State<SignUp> {
                             _obscureText = !_obscureText;
                           });
                         },
-                        controller: passController,prefixIcon: Icon(Icons.lock,color: MyAppTheme.blackColor,)),
+                        controller: passController,prefixIcon: Icon(Icons.lock,color: MyAppTheme.whiteColor,)),
                     const SizedBox(height: 6,),
                     passwordTextField(
                         hintText: "Enter Your Retype Password",
@@ -196,11 +194,17 @@ class _SignUpState extends State<SignUp> {
                             _obscureText = !_obscureText;
                           });
                         },
-                        controller: confirmPassController,prefixIcon: Icon(Icons.lock,color: MyAppTheme.blackColor,)),
+                        controller: confirmPassController,prefixIcon: Icon(Icons.lock,color: MyAppTheme.whiteColor,)),
 
                     Row(
                       children: [
-                        Checkbox(value: isCheck, onChanged: (value) => setState(() {
+                        Checkbox(
+                          side: BorderSide(color: MyAppTheme.whiteColor ),
+                          activeColor: MyAppTheme.whiteColor,
+                          checkColor: MyAppTheme.logoColor,
+                          hoverColor: MyAppTheme.whiteColor,
+                          focusColor: MyAppTheme.whiteColor,
+                          value: isCheck, onChanged: (value) => setState(() {
                           isCheck = value!;
                         }),),
                         Expanded(child: blackLight12Text('By clicking this for sign up, you are agreed to your Terms & conditions')),
