@@ -548,7 +548,7 @@ class _HomeState extends State<Home> {
                                         height: height * 0.10,
                                         title: "Active Direct",
                                         value:
-                                        "\$ ${homeModel!.dashboard![0].directCountActiveTeam}",
+                                        " ${homeModel!.dashboard![0].directCountActiveTeam}",
                                         widget: Icon(Icons.person, size: 35,color: Colors.white),
                                       )),
                                   const SizedBox(
@@ -559,7 +559,7 @@ class _HomeState extends State<Home> {
                                         height: height * 0.10,
                                         title: "Team Business",
                                         value:
-                                        "\$ ${homeModel!.dashboard![0].downlineActTeamCount}",
+                                        " ${homeModel!.dashboard![0].downlineActTeamCount}",
                                         widget: Icon(Icons.person, size: 35,color: Colors.white),
                                       )),
                                 ],
@@ -571,7 +571,7 @@ class _HomeState extends State<Home> {
                                         height: height * 0.10,
                                         title: "Self Business",
                                         value:
-                                        "\$ ${homeModel!.dashboard![0].totalSelfBusiness}",
+                                        " ${homeModel!.dashboard![0].totalSelfBusiness}",
                                         widget: Icon(Icons.person, size: 35,color: Colors.white,),
                                       )),
                                   const SizedBox(
@@ -582,7 +582,7 @@ class _HomeState extends State<Home> {
                                         height: height * 0.10,
                                         title: "Total Team Busine",
                                         value:
-                                        "\$ ${homeModel!.dashboard![0].todayDownlineBusiness}",
+                                        " ${homeModel!.dashboard![0].todayDownlineBusiness}",
                                         widget: Icon(Icons.person, size: 35,color: Colors.white),
                                       )),
                                 ],
