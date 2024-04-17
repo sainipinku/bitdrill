@@ -1,8 +1,11 @@
 import 'package:bitdrill/dilog_box/logout.dart';
+import 'package:bitdrill/screen/dashboard/profile/change_password.dart';
+import 'package:bitdrill/screen/dashboard/profile/edit_profile.dart';
 import 'package:bitdrill/screen/dashboard/report/withdrwal_history.dart';
 import 'package:bitdrill/utils/my_app_theme.dart';
 import 'package:bitdrill/utils/my_styles.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ProfileScreen extends StatefulWidget {
   ProfileScreen({super.key});
@@ -14,40 +17,37 @@ class ProfileScreen extends StatefulWidget {
 class _ProfileScreenState extends State<ProfileScreen> {
   List option = [
     {
-      "title": "My Profile",
+      "title": "Edit Profile",
       "icon" : Icon(Icons.person),
       "nextScreen" : WithdrawalListScreen(),
     },{
       "title": "Change Password",
-      "icon" : Icon(Icons.person),
+      "icon" : Icon(Icons.password),
       "nextScreen" : WithdrawalListScreen(),
-    },{
-      "title": "My Profile",
-      "icon" : Icon(Icons.person),
-      "nextScreen" : WithdrawalListScreen(),
-    },{
-      "title": "My Profile",
-      "icon" : Icon(Icons.person),
-      "nextScreen" : WithdrawalListScreen(),
-    }, {
-      "title": "My Profile",
-      "icon" : Icon(Icons.person),
-      "nextScreen" : WithdrawalListScreen(),
-    },{
-      "title": "Change Password",
-      "icon" : Icon(Icons.person),
-      "nextScreen" : WithdrawalListScreen(),
-    },{
-      "title": "My Profile",
-      "icon" : Icon(Icons.person),
-      "nextScreen" : WithdrawalListScreen(),
-    },{
+    },
+    {
       "title": "Logout",
-      "icon" : Icon(Icons.person),
+      "icon" : Icon(Icons.logout),
       "nextScreen" : WithdrawalListScreen(),
     },
   ];
+  String? memberID = "";
+  String? memberName = "";
+  void getUserDetails() async{
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      memberID = prefs.getString('user_memberid') ?? '';
+      memberName = prefs.getString('user_memeberName') ?? '';
+    });
+    print('memeber id==========${prefs.getString('user_memberid')} member name==========${ prefs.getString('user_memeberName')}');
 
+  }
+   @override
+  void initState() {
+    // TODO: implement initState
+     getUserDetails();
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
@@ -60,7 +60,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   color: MyAppTheme.cardBgSecColor,
                   height: MediaQuery.sizeOf(context).height*0.15,
                   width: double.infinity,
-                  child: const Row(
+                  child:  Row(
                     children: [
                       Icon(
                         Icons.person,
@@ -72,8 +72,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('Shree ganeshay namah',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20,color: Colors.white),),
-                          Text('2558594',style: TextStyle(fontSize: 17,color: Colors.white),)
+                          Text(memberName!,style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20,color: Colors.white),),
+                          Text(memberID!,style: TextStyle(fontSize: 17,color: Colors.white),)
                         ],
                       )
                     ],
@@ -83,89 +83,98 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 Container(
                   color: MyAppTheme.cardBgSecColor,
                   padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                  child: ListView.builder(
-                      shrinkWrap: true,
-                      itemCount: option.length,
-                      itemBuilder: (context, index) =>
-                          customBtn(
-                              onTap: () {
-                                print('dhjdhjdhdjh');
-                                showDialog(
-                                    barrierDismissible: true,
-                                    context: context,
-                                    builder: (_) =>  LogoutDilogBox()
-                                );
-                              },
-                              icon: option[index]['icon'],
-                              title: option[index]['title'] )
+                  child: GestureDetector(
+                    onTap: (){
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                EditProfile(),
+                          ));
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.all(10),
+                      decoration:  BoxDecoration(
+
+                          border: Border(
+                              bottom: BorderSide(
+                                  color: Colors.white
+                              )
+                          )
+                      ),
+                      child: Row(
+                        children: [
+                          Icon(Icons.person,color: Colors.white),
+                          const SizedBox(width: 10,),
+                          Text('Edit Profile',style: MyStyles.white12LightStyle,),
+                        ],
+                      ),
+                    ),
                   ),
                 ),
+                Container(
+                  color: MyAppTheme.cardBgSecColor,
+                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                  child: InkWell(
+                    onTap: (){
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                ChangePassword(),
+                          ));
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.all(10),
+                      decoration:  BoxDecoration(
 
-                /*Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    CustomButton(
-                      icon: Icons.person,
-                      text: 'My Profile',
-                      onPressed: () {
-                        // add screen logic
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => RankBonusPage(),));
-                      },
+                          border: Border(
+                              bottom: BorderSide(
+                                  color: Colors.white
+                              )
+                          )
+                      ),
+                      child: Row(
+                        children: [
+                          Icon(Icons.password,color: Colors.white,),
+                          const SizedBox(width: 10,),
+                          Text('Change Password',style: MyStyles.white12LightStyle,),
+                        ],
+                      ),
                     ),
-
-                    CustomButton(
-                      icon: Icons.person,
-                      text: 'Change Password',
-                      onPressed: () {
-                        // add screen logic
-                      },
-                    ),
-                    CustomButton(
-                      icon: Icons.list_alt_outlined,
-                      text: 'My Trade',
-                      onPressed: () {
-                        // add screen logic
-                      },
-                    ),
-                    CustomButton(
-                      icon: Icons.list_alt_outlined,
-                      text: 'Add Referral',
-                      onPressed: () {
-                        // add screen logic
-                      },
-                    ),
-                    CustomButton(
-                      icon: Icons.list_alt_outlined,
-                      text: 'Term & Condition',
-                      onPressed: () {
-                        // add screen logic
-                      },
-                    ),
-                    CustomButton(
-                      icon: Icons.list_alt_outlined,
-                      text: 'Privacy Policy',
-                      onPressed: () {
-                        // add screen logic
-                      },
-                    ),
-                    CustomButton(
-                      icon: Icons.support_agent,
-                      text: 'Support',
-                      onPressed: () {
-                        // add screen logic
-                      },
-                    ),
-
-                    CustomButton(
-                      icon: Icons.logout_outlined,
-                      text: 'Logout',
-                      onPressed: () {
-                        showDialog(
+                  ),
+                ),
+                Container(
+                  color: MyAppTheme.cardBgSecColor,
+                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                  child: GestureDetector(
+                    onTap: (){
+                      showDialog(
+                          barrierDismissible: true,
                           context: context,
-                          builder: (BuildContext context) => logoutDialog(),
-                        );
-                      },
-                    ),*/
+                          builder: (_) =>  LogoutDilogBox()
+                      );
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.all(10),
+                      decoration:  BoxDecoration(
+
+                          border: Border(
+                              bottom: BorderSide(
+                                  color: Colors.white
+                              )
+                          )
+                      ),
+                      child: Row(
+                        children: [
+                          Icon(Icons.logout,color: Colors.white),
+                          const SizedBox(width: 10,),
+                          Text('Logout',style: MyStyles.white12LightStyle,),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
                 //   ],
                 // ),
               ]
@@ -204,40 +213,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
     );
   }
 
-
-  customBtn({
-    VoidCallback? onTap,
-    required Widget icon,
-    required String title,
-  }){
-    return InkWell(
-      onTap: onTap ?? (){
-        LogoutDilogBox();
-      },
-      child: Container(
-        padding: const EdgeInsets.all(10),
-        decoration:  BoxDecoration(
-
-            border: Border(
-                bottom: BorderSide(
-                    color: Colors.white
-                )
-            )
-        ),
-        child: Row(
-          children: [
-            Icon(
-              Icons.person,
-              size: 20,
-              color: Colors.white,
-            ),
-            const SizedBox(width: 10,),
-            Text(title,style: MyStyles.white12LightStyle,),
-          ],
-        ),
-      ),
-    );
-  }
 }
 
 

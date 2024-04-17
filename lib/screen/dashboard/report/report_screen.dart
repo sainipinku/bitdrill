@@ -1,5 +1,7 @@
 import 'dart:ffi';
 
+import 'package:bitdrill/screen/dashboard/report/direct_income_screen.dart';
+import 'package:bitdrill/screen/dashboard/report/level_income_screen.dart';
 import 'package:bitdrill/screen/dashboard/report/reward_status.dart';
 import 'package:bitdrill/screen/dashboard/report/withdrwal_history.dart';
 import 'package:bitdrill/utils/constants.dart';
@@ -19,28 +21,33 @@ class ReportScreen extends StatelessWidget {
 
   List reportList = [
     {
-      "title": dailyTradeProfit,
-      'icon': const Icon(Icons.list_alt_outlined),
+      "title": dailyMining,
+      'icon': const Icon(Icons.list_alt_outlined,color: Colors.white,),
       'nextPage': DailyTradeProfit()
     },
     {
-      "title": affiliateBonus,
-      'icon': const Icon(Icons.request_page_outlined),
+      "title": directIncome,
+      'icon': const Icon(Icons.request_page_outlined,color: Colors.white,),
       'nextPage': AffiliateBonus()
     },
     {
-      "title": ibTradeBonus,
-      'icon': Icon(Icons.request_page_outlined),
+      "title": levelIncome,
+      'icon': Icon(Icons.request_page_outlined,color: Colors.white,),
       'nextPage': IbTradeBonus()
     },
     {
-      "title": withdrawalHistory,
-      'icon': Icon(Icons.request_page_outlined),
+      "title": compondingIncome,
+      'icon': Icon(Icons.request_page_outlined,color: Colors.white,),
       'nextPage': WithdrawalListScreen()
     },
     {
-      "title": rewardStatus,
-      'icon': Icon(Icons.request_page_outlined),
+      "title": compoundingDirectIncome,
+      'icon': Icon(Icons.request_page_outlined,color: Colors.white,),
+      'nextPage': RewardStatus()
+    },
+    {
+      "title": compoundingLevelIncome,
+      'icon': Icon(Icons.request_page_outlined,color: Colors.white,),
       'nextPage': RewardStatus()
     },
   ];
@@ -54,7 +61,7 @@ class ReportScreen extends StatelessWidget {
       body: SafeArea(
         child: Container(
           height: height,
-            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            padding: const EdgeInsets.symmetric(horizontal: 8.0,vertical: 05.0),
             child: ListView.builder(
               shrinkWrap: true,
               itemCount: reportList.length,
@@ -62,7 +69,7 @@ class ReportScreen extends StatelessWidget {
                   context: context,
                   icon: reportList[index]['icon'],
                   text: reportList[index]['title'],
-                  nextScreen: reportList[index]['nextPage']),
+                  nextScreen: reportList[index]['nextPage'], index:index),
             )),
       ),
     );
@@ -72,19 +79,23 @@ class ReportScreen extends StatelessWidget {
 reportOptionContainer(
     {required BuildContext context,
     required String text,
+    required int index,
     required Widget nextScreen,
     Icon? icon}) {
-  return InkWell(
+  return GestureDetector(
     onTap: () {
-      Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => nextScreen,
-          ));
+      if(index == 0){
+        Navigator.push(context, MaterialPageRoute(builder: (context) => DailyTradeProfit(),));
+      }else if (index == 1){
+        Navigator.push(context, MaterialPageRoute(builder: (context) => DirectIncomeScreen(),));
+      }else if (index == 2){
+        Navigator.push(context, MaterialPageRoute(builder: (context) => LevelIncomeScreen(),));
+      }
+
     },
     child: Container(
-      padding: const EdgeInsets.all(8),
-      margin: const EdgeInsets.symmetric(vertical: 2),
+      padding: const EdgeInsets.symmetric(horizontal: 10.0,vertical: 10.0),
+      margin: const EdgeInsets.symmetric(vertical: 5),
       color: MyAppTheme.cardBgSecColor,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,

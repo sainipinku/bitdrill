@@ -39,14 +39,14 @@ class _ShowDilogBoxState extends State<ShowDilogBox>  with SingleTickerProviderS
           child: Container(
             margin: const EdgeInsets.symmetric(horizontal: 15.0),
             alignment: Alignment.center,
-            height: MediaQuery.of(context).size.height * 0.18,
+            height: MediaQuery.of(context).size.height * 0.10,
             width: MediaQuery.of(context).size.width,
             decoration: ShapeDecoration(
                 color: MyAppTheme.whiteColor,
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(5.0))),
             child: Center(
-              child: Text(widget.message,style: MyStyles.black16BoldStyle,),
+              child: Text(widget.message,style: MyStyles.blackk16BoldStyle,),
             ),
           ),
 

@@ -1,12 +1,15 @@
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:animated_toggle_switch/animated_toggle_switch.dart';
 import 'package:bitdrill/common_ui/common_container.dart';
 import 'package:bitdrill/locator.dart';
 import 'package:bitdrill/model/DepositModel.dart';
+import 'package:bitdrill/model/LastClosingModel.dart';
 import 'package:bitdrill/model/home_model.dart';
 import 'package:bitdrill/providers/home_provider.dart';
 import 'package:bitdrill/repository/auth_repository.dart';
+import 'package:bitdrill/screen/dashboard/home/compound_invest.dart';
 import 'package:bitdrill/screen/dashboard/home/depositBottomSheet.dart';
 import 'package:bitdrill/utils/helper.dart';
 import 'package:bitdrill/screen/dashboard/home/p2p_btm_sheet.dart';
@@ -16,6 +19,7 @@ import 'package:bitdrill/utils/my_app_theme.dart';
 import 'package:bitdrill/utils/my_images.dart';
 import 'package:bitdrill/utils/ui_helper.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:simple_ripple_animation/simple_ripple_animation.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -30,6 +34,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  bool positive = false;
   List banner = [
     'assets/images/Slider_01.jpg',
     'assets/images/Slider_02.jpg',
@@ -46,6 +51,7 @@ class _HomeState extends State<Home> {
     _controller = PageController(initialPage: 0);
     WidgetsBinding.instance.addPostFrameCallback((_) => _animateSlider());
     locator<HomeProvider>().getHomeData(context);
+    locator<HomeProvider>().getLastClosingDat(context);
     locator<HomeProvider>().getttDepositDetailsHomeData(context);
     super.initState();
   }
@@ -66,6 +72,11 @@ class _HomeState extends State<Home> {
       }
     });
   }
+  @override
+  void dispose() {
+    locator<HomeProvider>().timerClose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -73,8 +84,8 @@ class _HomeState extends State<Home> {
     var height = MediaQuery.of(context).size.height;
     bool isLoading = Provider.of<HomeProvider>(context).isLoading;
     HomeModel? homeModel = Provider.of<HomeProvider>(context).homeModel;
-    DepositModel? depositModel =
-        Provider.of<HomeProvider>(context).depositModel;
+    int reminingTime = Provider.of<HomeProvider>(context).reminingTime;
+    DepositModel? depositModel = Provider.of<HomeProvider>(context).depositModel;
     return Scaffold(
       body: Consumer<HomeProvider>(
         builder: (context, provider, child) {
@@ -179,7 +190,106 @@ class _HomeState extends State<Home> {
                                           "\$ ${homeModel!.dashboard![0].todayIncome}"))
                                 ],
                               ),
-                              RippleAnimation(
+                              Center(
+                                child: AnimatedToggleSwitch<bool>.dual(
+                                  current: reminingTime == 0 ? false : reminingTime >= 6 ? true : false,
+                                  first: false,
+                                  second: true,
+                                  spacing: 50.0,
+                                  style:  ToggleStyle(
+                                    backgroundColor: MyAppTheme.cardBgSecColor,
+                                    borderColor: Colors.transparent,
+                                    boxShadow: const [
+                                      BoxShadow(
+                                        color: Colors.black26,
+                                        spreadRadius: 1,
+                                        blurRadius: 2,
+                                        offset: Offset(0, 1.5),
+                                      ),
+                                    ],
+                                  ),
+                                  borderWidth: 5.0,
+                                  height: 55,
+                                  onChanged: (b) => setState(() => {
+                                    if(reminingTime >= 6){
+                                      provider.sendCenterHomeData(context),
+                                      positive = b
+                                    }
+
+                                  }),
+                                  styleBuilder: (b) =>
+                                      ToggleStyle(indicatorColor: b ? Colors.red : Colors.green),
+                                  iconBuilder: (value) => value
+                                      ? Center(child: Text('No',style: TextStyle(color: Colors.white),))
+                                      : Center(child: Text('Yes',style: TextStyle(color: Colors.white))),
+                                  textBuilder: (value) => value
+                                      ? Center(child: Text('${_formatTime(int.parse('${(provider.hours)-(provider.ghours)}'))}:${_formatTime(int.parse('${(provider.minutes)-(provider.gminutes)}'))}:${_formatTime(int.parse('${(provider.seconds)}'))}',style: TextStyle(color: Colors.white)))
+                                      : Center(child: Text('00:00:00',style: TextStyle(color: Colors.white))),
+                                ),
+                              ),
+                            /*  Padding(
+                                padding: const EdgeInsets.all(10.0),
+                                child: Center(
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      reminingTime >= 6 ?  provider.sendCenterHomeData(context) : null;
+                                    },
+                                    child: AnimatedContainer(
+                                      duration: Duration(milliseconds: 300),
+                                      width: 200.0,
+                                      height: 50.0,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(50.0),
+                                        color: MyAppTheme.cardBgSecColor,
+                                      ),
+                                      child: Row(
+                                        crossAxisAlignment: CrossAxisAlignment.center,
+                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          reminingTime >= 6 ?
+                                          Container(
+                                              width: 80.0,
+                                              height: 50.0,
+                                              decoration: BoxDecoration(
+                                                borderRadius: BorderRadius.circular(50.0),
+                                                color: Colors.green,
+                                              ),
+                                            child: Center(
+                                              child: Text('Yes',style: TextStyle(color: Colors.white,fontSize: 16),),
+                                            ),
+
+                                          ): Padding(
+                                            padding: const EdgeInsets.only(left: 20.0),
+                                            child: Text(
+                                              '${_formatTime(int.parse('${(provider.hours)-(provider.ghours)}'))}:${_formatTime(int.parse('${(provider.minutes)-(provider.gminutes)}'))}:${_formatTime(int.parse('${(provider.seconds)}'))}',
+                                              style: TextStyle(color: Colors.white,),
+                                            ),
+                                          ),
+                                          reminingTime >= 6 ? Padding(
+                                            padding: const EdgeInsets.only(right: 20.0),
+                                            child: Text(
+                                              '0${provider.hours}:${_formatTime(provider.minutes)}:${_formatTime(provider.seconds)}',
+                                              style: TextStyle(color: Colors.white,),
+                                            ),
+                                          ) :
+                                          Container(
+                                              width: 80.0,
+                                              height: 50.0,
+                                              decoration: BoxDecoration(
+                                                borderRadius: BorderRadius.circular(50.0),
+                                                color: Colors.red,
+                                              ),
+                                            child: Center(
+                                            child: Text('No',style: TextStyle(color: Colors.white,fontSize: 16),),
+                                  ),
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),*/
+                           /*   RippleAnimation(
                                 child: Center(
                                   child: Container(
                                     height: 150,
@@ -190,7 +300,7 @@ class _HomeState extends State<Home> {
                                         begin: Alignment.topLeft,
                                         end: Alignment.bottomRight,
                                         colors: [
-                                         MyAppTheme.cardBgSecColor,
+                                          MyAppTheme.cardBgSecColor,
                                           MyAppTheme.cardBgSecColor,
                                         ], // Example gradient colors
                                       ),
@@ -205,13 +315,17 @@ class _HomeState extends State<Home> {
                                         border: Border.all(color: Colors.orange, width: 5),
                                       ),
                                       child: Center(
-                                        child: GestureDetector(
+                                        child:  GestureDetector(
                                           onTap: () {
-                                            provider.sendCenterHomeData(context);
+                                            if(display = true){
+                                              callCountDownTimer();
+                                              provider.sendCenterHomeData(context);
+                                            }
+
                                           },
                                           child: Container(
                                             height: 30,
-                                            width: 70,
+                                            width: 90,
                                             decoration: BoxDecoration(
                                               shape: BoxShape.rectangle,
                                               borderRadius: BorderRadius.all(Radius.circular(10.0)),
@@ -219,8 +333,8 @@ class _HomeState extends State<Home> {
                                             ),
                                             child: Center(
                                               child: Text(
-                                                'Click',
-                                                style: TextStyle(color: Colors.white),
+                                                  display == false ? "Mining":'0$_hours:${_formatTime(_minutes)}:${_formatTime(_seconds)}',
+                                                style: TextStyle(color: Colors.white,),
                                               ),
                                             ),
                                           ),
@@ -235,7 +349,7 @@ class _HomeState extends State<Home> {
                                 minRadius: 75,
                                 ripplesCount: 6,
                                 duration: const Duration(milliseconds: 6 * 300),
-                              ),
+                              ),*/
                               Container(
                                 padding:
                                 const EdgeInsets.symmetric(vertical: 5),
@@ -248,21 +362,21 @@ class _HomeState extends State<Home> {
                                   MainAxisAlignment.spaceAround,
                                   children: [
                                     innerContainerComponent(
-                                        img: MyImages.thisProject,
+                                        img: MyImages.withdrawal,
                                         onTap: () {
                                           withdrawalBottomSheet(
                                               context, "0.11");
                                         },
                                         title: withdrawal),
                                     innerContainerComponent(
-                                        img: MyImages.thisProject,
+                                        img: MyImages.deposit,
                                         title: deposit,
                                         onTap: () {
                                           depositBottomSheet(
                                               context, depositModel!);
                                         }),
                                     innerContainerComponent(
-                                        img: MyImages.thisProject,
+                                        img: MyImages.p2p,
                                         title: p2p,
                                         onTap: () {
                                           p2pBottomSheet(context, "0.11");
@@ -270,6 +384,7 @@ class _HomeState extends State<Home> {
                                   ],
                                 ),
                               ),
+
                               Container(
                                 decoration: BoxDecoration(
                                   color: MyAppTheme.cardBgSecColor,
@@ -309,8 +424,10 @@ class _HomeState extends State<Home> {
                                         context,
                                         MaterialPageRoute(
                                           builder: (context) =>
-                                              AccountActivation(),
-                                        ));
+                                              AccountActivation(amount: '${homeModel!.dashboard![0].activationEWalletBalance}',),
+                                        )).then((value) => {
+                                           //   locator<HomeProvider>().getHomeData(context)
+                                    });
                                   }),
                               Row(
                                 children: [
@@ -350,6 +467,18 @@ class _HomeState extends State<Home> {
                                           "\$ ${homeModel!.dashboard![0].levelincome}"))
                                 ],
                               ),
+                              mainBtn(
+                                  text: componding,
+                                  onTap: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              CompoundInvest(amount: '${homeModel!.dashboard![0].activationEWalletBalance}',),
+                                        )).then((value) => {
+                                      //   locator<HomeProvider>().getHomeData(context)
+                                    });
+                                  }),
                               Row(
                                 children: [
                                   Expanded(
@@ -390,7 +519,7 @@ class _HomeState extends State<Home> {
                                         "\$ ${homeModel!.dashboard![0].workingCurrentBalance}",
                                         widget: CircleAvatar(
                                           foregroundImage:
-                                          AssetImage(MyImages.thisProject),
+                                          AssetImage(MyImages.mainWallet),
                                           radius: height * 0.03,
                                         ),
                                       )),
@@ -405,7 +534,7 @@ class _HomeState extends State<Home> {
                                         "\$ ${homeModel!.dashboard![0].totWithdrawal}",
                                         widget: CircleAvatar(
                                           foregroundImage:
-                                          AssetImage(MyImages.thisProject),
+                                          AssetImage(MyImages.totalWithdrawal),
                                           radius: height * 0.03,
                                         ),
                                       )),
@@ -480,7 +609,9 @@ class _HomeState extends State<Home> {
       ,
     );
   }
-
+  String _formatTime(int time) {
+    return time < 10 ? '0$time' : '$time';
+  }
   innerContainerComponent({
     required String img,
     required String title,
@@ -491,9 +622,12 @@ class _HomeState extends State<Home> {
       onTap: onTap ?? () {},
       child: Column(
         children: [
-          CircleAvatar(
-            foregroundImage: AssetImage(img),
-            radius: height * 0.03,
+          Padding(
+            padding: EdgeInsets.all(8.0), // Adjust the padding value as needed
+            child: CircleAvatar(
+              foregroundImage: AssetImage(img),
+              radius: height * 0.03,
+            ),
           ),
           black12Text(title)
         ],

@@ -9,7 +9,7 @@ class RewardStatus extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: customAppBar(title: rewardStatus,backBtn: backBtn(context: context)),
+      appBar: customAppBar(title: compoundingDirectIncome,backBtn: backBtn(context: context)),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8.0),
         child: ListView.builder(

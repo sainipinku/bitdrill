@@ -7,10 +7,10 @@ class ActivationModel {
   ActivationModel({this.status, this.msg, this.memberID, this.investamount});
 
   ActivationModel.fromJson(Map<String, dynamic> json) {
-    status = json['status'];
-    msg = json['Msg'];
-    memberID = json['MemberID'];
-    investamount = json['investamount'];
+    status = json['status'] ?? 0;
+    msg = json['Msg'] ?? '';
+    memberID = json['MemberID'] ?? '';
+    investamount = json['investamount'] ?? '';
   }
 
   Map<String, dynamic> toJson() {

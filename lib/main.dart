@@ -2,6 +2,8 @@
 import 'package:bitdrill/locator.dart';
 import 'package:bitdrill/providers/auth_provider.dart';
 import 'package:bitdrill/providers/home_provider.dart';
+import 'package:bitdrill/providers/profile_provider.dart';
+import 'package:bitdrill/providers/report_provider.dart';
 
 import 'package:bitdrill/utils/my_app_theme.dart';
 
@@ -22,6 +24,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(providers: [
       ChangeNotifierProvider(create: (context) => locator<HomeProvider>()),
+      ChangeNotifierProvider(create: (context) => locator<ProfileProvider>()),
+      ChangeNotifierProvider(create: (context) => locator<ReportProvider>()),
       ChangeNotifierProvider(create: (context) => AuthProvider(),builder: (context, child) {
         return MaterialApp(
           debugShowCheckedModeBanner: false,

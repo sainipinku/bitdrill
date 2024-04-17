@@ -26,6 +26,9 @@ class AuthProvider extends ChangeNotifier {
           loginModel = response;
           SharedPrefs.setMSRNO(loginModel!.msrno!);
           SharedPrefs.setMemberId(loginModel!.memberid!);
+          SharedPrefs.setMemberName(loginModel!.membername!);
+          SharedPrefs.setMemberEmail(loginModel!.email!);
+          SharedPrefs.setMemberPhone(loginModel!.mobile!);
           Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const DashBoard(),));
           notifyListeners();
           print("response============${loginModel!.title}");

@@ -50,6 +50,7 @@ class _DashBoardState extends State<DashBoard> {
         }
       },
       child:  Scaffold(
+        appBar: AppBar(backgroundColor: MyAppTheme.logoColor,title: Text('DashBoard',style: MyStyles.white16BoldStyle,),),
         body: screens[selectedIndex],
         bottomNavigationBar:BottomNavigationBar(
           items: const [

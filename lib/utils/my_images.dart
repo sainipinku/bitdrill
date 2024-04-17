@@ -18,4 +18,9 @@ class MyImages{
 
   //////////////////////////////////////
   static String thisProject ='assets/images/logo.png';
+  static String withdrawal ='assets/images/withdrawal.png';
+  static String deposit ='assets/images/deposit.png';
+  static String p2p ='assets/images/p2p.png';
+  static String mainWallet ='assets/images/main_wallet.png';
+  static String totalWithdrawal ='assets/images/total_withdrawal.png';
 }

@@ -428,7 +428,6 @@ Widget whiteTextField({
   TextInputType? textInputType,
 }){
   return Container(
-    padding: const EdgeInsets.symmetric(horizontal: 8),
     child: TextFormField(
       //enabled: (disabled== null)? true : !disabled,
         style: MyStyles.lightBlack14BoldStyle,

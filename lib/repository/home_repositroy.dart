@@ -4,8 +4,10 @@ import 'package:bitdrill/apis/apis.dart';
 import 'package:bitdrill/model/ActivationModel.dart';
 import 'package:bitdrill/model/DepositModel.dart';
 import 'package:bitdrill/model/DepositeFundsModel.dart';
+import 'package:bitdrill/model/LastClosingModel.dart';
 import 'package:bitdrill/model/MessageModel.dart';
 import 'package:bitdrill/model/PackegaIdModel.dart';
+import 'package:bitdrill/model/TypeModel.dart';
 import 'package:bitdrill/model/WithDrawModel.dart';
 import 'package:bitdrill/model/country_model.dart';
 import 'package:bitdrill/model/home_model.dart';
@@ -218,9 +220,37 @@ Future<ActivationModel> activationHomeData(BuildContext context,String amount,St
   OverlayEntry loader = Helpers.overlayLoader(context);
   Overlay.of(context)!.insert(loader);
   SharedPreferences prefs = await SharedPreferences.getInstance();
-  String userToken = prefs.getString('user_msrno') ?? '';
+  String userToken = prefs.getString('user_memberid') ?? '';
   var url;
-  url = Uri.parse('https://api.bitdrill.world/Service.svc/activation?msrno=$userToken&loginmemberid=$userToken&packageid=$pacgId&investamount=$amount&cryptotype=usdt');
+  url = Uri.parse('https://api.bitdrill.world/Service.svc/activation?memberid=$userToken&loginmemberid=$userToken&packageid=$pacgId&investamount=$amount&cryptotype=usdt');
+  final http.Response response = await http.get(
+    url,
+    headers: <String, String>{
+      'Content-Type': 'application/json; charset=UTF-8',
+    },
+  );
+  if (response.statusCode == 200) {
+    print('status true ==${response.body}');
+    Helpers.hideLoader(loader);
+    return  ActivationModel.fromJson(json.decode(response.body));
+
+  } else {
+    print('status flause');
+    Helpers.hideLoader(loader);
+    throw new Exception(response.body);
+
+  }
+
+}
+
+Future<ActivationModel> compoundingHomeData(BuildContext context,String amount,String pacgId) async
+{
+  OverlayEntry loader = Helpers.overlayLoader(context);
+  Overlay.of(context)!.insert(loader);
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  String userToken = prefs.getString('user_memberid') ?? '';
+  var url;
+  url = Uri.parse('https://api.bitdrill.world/Service.svc/compounding?memberid=$userToken&loginmemberid=$userToken&packageid=$pacgId&investamount=$amount&cryptotype=usdt');
   final http.Response response = await http.get(
     url,
     headers: <String, String>{
@@ -249,6 +279,91 @@ Future pacakgeIdhomeData(BuildContext context) async
   String userToken = prefs.getString('user_msrno') ?? '';
   var url;
   url = Uri.parse('https://api.bitdrill.world/Service.svc/packagelist?msrno=$userToken');
+  final http.Response response = await http.get(
+    url,
+    headers: <String, String>{
+      'Content-Type': 'application/json; charset=UTF-8',
+    },
+  );
+  if (response.statusCode == 200) {
+    print('status true ==${response.body}');
+    Helpers.hideLoader(loader);
+    return  response;
+
+  } else {
+    print('status flause');
+    Helpers.hideLoader(loader);
+    throw new Exception(response.body);
+
+  }
+
+}
+
+Future compoundpackageIdhomeData(BuildContext context) async
+{
+  OverlayEntry loader = Helpers.overlayLoader(context);
+  Overlay.of(context)!.insert(loader);
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  String userToken = prefs.getString('user_msrno') ?? '';
+  var url;
+  url = Uri.parse('https://api.bitdrill.world/Service.svc/compoundpackage?msrno=$userToken');
+  final http.Response response = await http.get(
+    url,
+    headers: <String, String>{
+      'Content-Type': 'application/json; charset=UTF-8',
+    },
+  );
+  if (response.statusCode == 200) {
+    print('status true ==${response.body}');
+    Helpers.hideLoader(loader);
+    return  response;
+
+  } else {
+    print('status flause');
+    Helpers.hideLoader(loader);
+    throw new Exception(response.body);
+
+  }
+
+}
+
+Future<TypeModel> levelNoData(BuildContext context,String status,String leavelno) async
+{
+  OverlayEntry loader = Helpers.overlayLoader(context);
+  Overlay.of(context)!.insert(loader);
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  String userToken = prefs.getString('user_msrno') ?? '';
+  var url;
+  url = Uri.parse('https://api.bitdrill.world/Service.svc/level_team?msrno=$userToken&status=$status&levelno=$leavelno');
+  final http.Response response = await http.get(
+    url,
+    headers: <String, String>{
+      'Content-Type': 'application/json; charset=UTF-8',
+    },
+  );
+  if (response.statusCode == 200) {
+    print('status true ==${response.body}');
+    Helpers.hideLoader(loader);
+    return  TypeModel.fromJson(json.decode(response.body));
+
+  } else {
+    print('status flause');
+    Helpers.hideLoader(loader);
+    throw new Exception(response.body);
+
+  }
+
+}
+
+
+Future lastClosingData(BuildContext context) async
+{
+  OverlayEntry loader = Helpers.overlayLoader(context);
+  Overlay.of(context)!.insert(loader);
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  String userToken = prefs.getString('user_msrno') ?? '';
+  var url;
+  url = Uri.parse('https://api.bitdrill.world/Service.svc/lastclosing?msrno=$userToken');
   final http.Response response = await http.get(
     url,
     headers: <String, String>{

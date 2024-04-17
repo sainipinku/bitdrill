@@ -13,14 +13,21 @@ class SharedPrefs {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setString('user_memberid', memberid);
   }
-  static setUserId(int userId) async {
+  static setMemberName(String memberName) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setInt('user_id', userId);
+    prefs.setString('user_memeberName', memberName);
   }
-  static setTrialFirstTimeUser(bool status) async {
+  static setMemberPhone(String phone) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setBool('first_time_trial', status);
+    prefs.setString('user_phone', phone);
+
   }
+  static setMemberEmail(String email) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString('user_email', email);
+
+  }
+
 
   //////////Getters////////////////
   static Future<String> getMSRNO() async {
@@ -31,17 +38,17 @@ class SharedPrefs {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     return prefs.getString('user_type') ?? "";
   }
-  static Future<int> getUserId() async {
+  static Future<String> getMemberName() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    return prefs.getInt('user_id') ?? -1;
+    return prefs.getString('user_memeberName') ?? "";
   }
-  static Future<String> getEmail() async {
+  static Future<String> getUserEmail() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    return prefs.getString('email') ?? "";
+    return prefs.getString('user_email') ?? "";
   }
-  static Future<bool> getTrialFirstTimeUser() async {
+  static Future<String> getUserPhone() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    return prefs.getBool('first_time_trial') ?? false;
+    return prefs.getString('user_phone') ?? "";
   }
 
   ///remove all data

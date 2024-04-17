@@ -199,7 +199,7 @@ class MyStyles {
   static TextStyle black26BoldStyle =  GoogleFonts.quicksand(
       fontWeight: MyFontWeight.bold,
       fontSize: 26,
-      color: MyAppTheme.blackColor);
+      color: MyAppTheme.whiteColor);
 
 
   static TextStyle black20BoldStyle =  GoogleFonts.quicksand(

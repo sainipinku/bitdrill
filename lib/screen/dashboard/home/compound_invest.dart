@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:bitdrill/locator.dart';
 import 'package:bitdrill/model/ActivationModel.dart';
 import 'package:bitdrill/model/PackegaIdModel.dart';
 import 'package:bitdrill/providers/home_provider.dart';
@@ -14,15 +13,15 @@ import 'package:custom_searchable_dropdown/custom_searchable_dropdown.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class AccountActivation extends StatefulWidget {
+class CompoundInvest extends StatefulWidget {
   final String amount;
-  AccountActivation({super.key,required this.amount});
+  const CompoundInvest({Key? key,required this.amount}) : super(key: key);
 
   @override
-  State<AccountActivation> createState() => _AccountActivationState();
+  State<CompoundInvest> createState() => _CompoundInvestState();
 }
 
-class _AccountActivationState extends State<AccountActivation> {
+class _CompoundInvestState extends State<CompoundInvest> {
   late double height;
 
   late double width;
@@ -37,7 +36,6 @@ class _AccountActivationState extends State<AccountActivation> {
   void initState() {
     // TODO: implement initState
     getHomeData(context);
-    locator<HomeProvider>().changeAmount(widget.amount);
     super.initState();
   }
 
@@ -45,7 +43,7 @@ class _AccountActivationState extends State<AccountActivation> {
     try {
       Helpers.verifyInternet().then((intenet) {
         if (intenet) {
-          pacakgeIdhomeData(context).then((response) {
+          compoundpackageIdhomeData(context).then((response) {
             setState(() {
               if(json.decode(response.body)['status'] == 1){
                 packegeid = json.decode(response.body)['packagelist'];
@@ -63,7 +61,6 @@ class _AccountActivationState extends State<AccountActivation> {
       print('Something went wrong');
     }
   }
-
   @override
   Widget build(BuildContext context) {
     width =MediaQuery.sizeOf(context).width;
@@ -83,7 +80,7 @@ class _AccountActivationState extends State<AccountActivation> {
                 Column(
                   children: [
                     SizedBox(height: height*0.04,),
-                    black26Text("\$ ${provider.totlaAmount}"),
+                    activationModel == null ? black26Text("\$ ${widget.amount}"):  black26Text("\$ ${activationModel?.investamount}"),
                     black16Text(activationBalance),
                     Container(
                       width: width,
@@ -135,8 +132,8 @@ class _AccountActivationState extends State<AccountActivation> {
 
                 SizedBox(
                   width: width,
-                  child: mainBtn(text: activate, onTap: (){
-                    provider.sendActivationHomeData(context,amountController.text,packageId);
+                  child: mainBtn(text: componding, onTap: (){
+                    provider.sendCompoundingHomeData(context,amountController.text,packageId);
                   }),
                 )
 

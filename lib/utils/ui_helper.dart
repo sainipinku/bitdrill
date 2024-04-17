@@ -111,7 +111,7 @@ customAppBar({
     title: white16BoldText(title),
     centerTitle: true,
     leading: backBtn ?? const SizedBox.shrink(),
-    backgroundColor: MyAppTheme.brownColor,
+    backgroundColor: MyAppTheme.logoColor,
   );
 }
 
