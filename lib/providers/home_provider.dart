@@ -27,6 +27,7 @@ class HomeProvider extends ChangeNotifier {
   MessageModel? messageModel;
   TypeModel? typeModel;
   String? totlaAmount;
+  String? mStatus;
   int reminingTime = 0;
   String reminingDate = '';
   int ghours = 00;
@@ -88,6 +89,7 @@ class HomeProvider extends ChangeNotifier {
             if(json.decode(response.body)['status'] == "1"){
               reminingTime = json.decode(response.body)['data'][0]['totHours'];
               reminingDate = json.decode(response.body)['data'][0]['IncomeDate'];
+              mStatus = json.decode(response.body)['data'][0]['mStatus'];
               // Define the correct date format pattern to match your input string
               print('time format=========${reminingTime}');
               // Remove extra spaces from the time string
@@ -119,7 +121,8 @@ class HomeProvider extends ChangeNotifier {
                 gseconds = newDateTime.second;
 
                 print('Time: $ghours:$gminutes:$gseconds');
-                reminingTime == 0 ? null : reminingTime >= 6 || (reminingTime < 6 && reminingTime > 0) ? callCountDownTimer() : null;
+              //  reminingTime == 0 ? null : reminingTime >= 6 || (reminingTime < 6 && reminingTime > 0) ? callCountDownTimer() : null;
+                  reminingTime <= 6 && mStatus == 'Active' ?  callCountDownTimer() : null;
               } catch (e) {
                 print('Failed to parse time: $e');
               }

@@ -85,6 +85,7 @@ class _HomeState extends State<Home> {
     bool isLoading = Provider.of<HomeProvider>(context).isLoading;
     HomeModel? homeModel = Provider.of<HomeProvider>(context).homeModel;
     int reminingTime = Provider.of<HomeProvider>(context).reminingTime;
+    String? mStatus = Provider.of<HomeProvider>(context).mStatus;
     DepositModel? depositModel = Provider.of<HomeProvider>(context).depositModel;
     return Scaffold(
       body: Consumer<HomeProvider>(
@@ -190,9 +191,10 @@ class _HomeState extends State<Home> {
                                           "\$ ${homeModel!.dashboard![0].todayIncome}"))
                                 ],
                               ),
+                              Center(child: Text('Tap to Mine',style: TextStyle(color: Colors.white),)),
                               Center(
                                 child: AnimatedToggleSwitch<bool>.dual(
-                                  current: reminingTime == 0 ? false : reminingTime >= 6 ? true : false,
+                                  current: reminingTime <= 6 && mStatus == 'Active' ? true : false,
                                   first: false,
                                   second: true,
                                   spacing: 50.0,
@@ -211,7 +213,7 @@ class _HomeState extends State<Home> {
                                   borderWidth: 5.0,
                                   height: 55,
                                   onChanged: (b) => setState(() => {
-                                    if(reminingTime >= 6){
+                                    if(reminingTime >= 6 && mStatus == 'Active'){
                                       provider.sendCenterHomeData(context),
                                       positive = b
                                     }
