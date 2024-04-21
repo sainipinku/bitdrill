@@ -40,7 +40,7 @@ Future editProfileData(BuildContext context,String phone,String email,String wal
   SharedPreferences prefs = await SharedPreferences.getInstance();
   String userToken = prefs.getString('user_msrno') ?? '';
   var url;
-  url = Uri.parse('https://api.bitdrill.world/Service.svc/editprofile?msrno=$userToken&mobile=$phone&emailid=$email&bank=&AccountNumber=&IFSCCode=&Address=&country=&state=&city=&pin=&walletaddress=$walletAddress&pan=&aadhar=&otp=');
+  url = Uri.parse('https://api.bitdrill.world/Service.svc/editprofile?msrno=$userToken&mobile=$phone&emailid=$email&bank=&AccountNumber=&IFSCCode=&Address=&country=105&state=1436&city=2745&pin=&walletaddress=$walletAddress&pan=&aadhar=&otp=1234');
   final http.Response response = await http.get(
     url,
     headers: <String, String>{

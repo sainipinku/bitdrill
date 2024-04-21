@@ -5,6 +5,7 @@ import 'package:bitdrill/dilog_box/showdilogbox.dart';
 import 'package:bitdrill/model/ActivationModel.dart';
 import 'package:bitdrill/model/DepositModel.dart';
 import 'package:bitdrill/model/DepositeFundsModel.dart';
+import 'package:bitdrill/model/FundTransferModel.dart';
 import 'package:bitdrill/model/LastClosingModel.dart';
 import 'package:bitdrill/model/MessageModel.dart';
 import 'package:bitdrill/model/TypeModel.dart';
@@ -21,6 +22,7 @@ class HomeProvider extends ChangeNotifier {
   bool get isLoading => _isLoading;
   HomeModel? homeModel;
   DepositModel? depositModel;
+  FundTransferModel? fundTransferModel;
   ActivationModel? activationModel;
   DepositeFundsModel? depositeFundsModel;
   WithDrawModel? withDrawModel;
@@ -232,14 +234,16 @@ class HomeProvider extends ChangeNotifier {
       print('Something went wrong');
     }
   }
-  void sendFundTransferHomeData(BuildContext context,String amount) async {
+  void sendFundTransferHomeData(BuildContext context,String amount,String memberId) async {
     try {
       Helpers.verifyInternet().then((intenet) {
         if (intenet) {
-          fundTransferHomeData(context,amount).then((response) {
-            depositModel = response;
-            Navigator.pop(context);
+          fundTransferHomeData(context,amount,memberId).then((response) {
+            fundTransferModel = response;
             notifyListeners();
+            if(fundTransferModel!.status == 1){
+              Navigator.pop(context);
+            }
           });
         } else {
           Helpers.createErrorSnackBar(context, "Please check your internet connection");

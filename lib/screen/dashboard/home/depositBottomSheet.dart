@@ -52,7 +52,7 @@ depositBottomSheet(BuildContext buildContext,DepositModel depositModel){
                           ),*/
                           blackLight14Text("Choose assets to Deposit"),
                           const SizedBox(height: 10,),
-                          black16Text('SEND ONLY TRC20 TO THIS QR CODE/ADDRESS'),
+                          black16Text('SEND ONLY BEP20.USDT TO THIS QR CODE/ADDRESS'),
                           Center(
                               child: FadeInImage(
                                 image: NetworkImage('${depositModel.data![0].qrcodeurl}'),

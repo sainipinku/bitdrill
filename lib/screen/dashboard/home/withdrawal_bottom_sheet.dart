@@ -44,7 +44,7 @@ withdrawalBottomSheet(BuildContext buildContext,String amount){
                           Row(
                             children: [
                               blackLight14Text("$balance :"),
-                              brown14Text("\$ $amount")
+                              white20Text("\$ $amount")
                             ],
                           ),
                           blackLight14Text("Choose assets to withdraw"),
@@ -59,10 +59,9 @@ withdrawalBottomSheet(BuildContext buildContext,String amount){
                           ),*/
                           Center(
                             child: mainBtn(
-                                text: 'Send OTP',
+                                text: 'Submit',
                                 width: 100,
                                 onTap: (){
-
                                   locator<HomeProvider>().sendWithdrawalHomeData(context,amountController.text);
                                 }),
                           )
@@ -74,7 +73,7 @@ withdrawalBottomSheet(BuildContext buildContext,String amount){
                         right: 0,
                         child: IconButton(onPressed: (){
                           Navigator.pop(context);
-                        }, icon: const Icon(Icons.cancel_outlined),
+                        }, icon: const Icon(Icons.cancel_outlined,color: Colors.white,),
                             iconSize: 35),
                       )
                     ],

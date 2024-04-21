@@ -349,3 +349,10 @@ Text brown14Text(String text) {
     style: MyStyles.brownBlack14BoldStyle,
   );
 }
+
+Text white20Text(String text) {
+  return Text(
+    text,
+    style: MyStyles.white20boldStyle,
+  );
+}

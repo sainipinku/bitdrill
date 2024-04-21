@@ -4,6 +4,7 @@ import 'package:bitdrill/apis/apis.dart';
 import 'package:bitdrill/model/ActivationModel.dart';
 import 'package:bitdrill/model/DepositModel.dart';
 import 'package:bitdrill/model/DepositeFundsModel.dart';
+import 'package:bitdrill/model/FundTransferModel.dart';
 import 'package:bitdrill/model/LastClosingModel.dart';
 import 'package:bitdrill/model/MessageModel.dart';
 import 'package:bitdrill/model/PackegaIdModel.dart';
@@ -81,7 +82,7 @@ Future<WithDrawModel> withdrawalHomeData(BuildContext context,String amount) asy
   SharedPreferences prefs = await SharedPreferences.getInstance();
   String userToken = prefs.getString('user_msrno') ?? '';
   var url;
-  url = Uri.parse('https://api.bitdrill.world/Service.svc/withdrwareqworking?msrno=$userToken&amount=$amount&otp=000&cryptotype=usdt');
+  url = Uri.parse('https://api.bitdrill.world/Service.svc/withdrwareqworking?msrno=$userToken&amount=$amount&otp=&cryptotype=usdt');
   final http.Response response = await http.get(
     url,
     headers: <String, String>{
@@ -187,14 +188,15 @@ Future<DepositModel> getDepositDetailsHomeData(BuildContext context) async
 
 }
 
-Future<DepositModel> fundTransferHomeData(BuildContext context,String amount) async
+Future<FundTransferModel> fundTransferHomeData(BuildContext context,String amount,String memberId) async
 {
   OverlayEntry loader = Helpers.overlayLoader(context);
   Overlay.of(context)!.insert(loader);
   SharedPreferences prefs = await SharedPreferences.getInstance();
-  String userToken = prefs.getString('user_msrno') ?? '';
+  String userToken = prefs.getString('user_memberid') ?? '';
+  print('login member id $userToken member id $memberId');
   var url;
-  url = Uri.parse('https://api.bitdrill.world/Service.svc/fundtransfer?msrno=$userToken&loginmemberid=$userToken&amount=$amount&otp=00');
+  url = Uri.parse('https://api.bitdrill.world/Service.svc/fundtransfer?memberid=$userToken&loginmemberid=$memberId&amount=$amount&otp=1234');
   final http.Response response = await http.get(
     url,
     headers: <String, String>{
@@ -204,7 +206,7 @@ Future<DepositModel> fundTransferHomeData(BuildContext context,String amount) as
   if (response.statusCode == 200) {
     print('status true ==${response.body}');
     Helpers.hideLoader(loader);
-    return  DepositModel.fromJson(json.decode(response.body));
+    return  FundTransferModel.fromJson(json.decode(response.body));
 
   } else {
     print('status flause');

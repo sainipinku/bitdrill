@@ -367,7 +367,7 @@ class _HomeState extends State<Home> {
                                         img: MyImages.withdrawal,
                                         onTap: () {
                                           withdrawalBottomSheet(
-                                              context, "0.11");
+                                              context, "${homeModel!.dashboard![0].workingCurrentBalance}");
                                         },
                                         title: withdrawal),
                                     innerContainerComponent(
@@ -381,12 +381,11 @@ class _HomeState extends State<Home> {
                                         img: MyImages.p2p,
                                         title: p2p,
                                         onTap: () {
-                                          p2pBottomSheet(context, "0.11");
+                                          p2pBottomSheet(context, "${homeModel!.dashboard![0].workingCurrentBalance}");
                                         }),
                                   ],
                                 ),
                               ),
-
                               Container(
                                 decoration: BoxDecoration(
                                   color: MyAppTheme.cardBgSecColor,
@@ -419,6 +418,7 @@ class _HomeState extends State<Home> {
                                   ],
                                 ),
                               ),
+
                               mainBtn(
                                   text: tradeAll,
                                   onTap: () {
@@ -468,6 +468,27 @@ class _HomeState extends State<Home> {
                                           value:
                                           "\$ ${homeModel!.dashboard![0].levelincome}"))
                                 ],
+                              ),
+                              InkWell(
+                                onTap: (){
+
+                                },
+                                child: Container(
+                                  height: height * 0.10,
+                                  width: width,
+                                  decoration: BoxDecoration(
+                                      color: MyAppTheme.cardBgSecColor,
+                                      borderRadius: const BorderRadius.all(Radius.circular(8),)
+                                  ),
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      white14Text('Total Income'),
+                                      white14Text("\$ ${homeModel!.dashboard![0].totalamount}")
+                                    ],
+                                  ),
+                                ),
                               ),
                               mainBtn(
                                   text: componding,

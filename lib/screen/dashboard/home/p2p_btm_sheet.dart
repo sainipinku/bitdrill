@@ -47,7 +47,7 @@ p2pBottomSheet(BuildContext buildContext,String amount){
                           Row(
                             children: [
                               blackLight14Text("$balance :"),
-                              brown14Text("\$ $amount")
+                              white20Text("\$ $amount")
                             ],
                           ),
                           const SizedBox(height: 20,),
@@ -63,11 +63,10 @@ p2pBottomSheet(BuildContext buildContext,String amount){
                           const SizedBox(height: 10,),*/
                           Center(
                             child: mainBtn(
-                                text: 'Send OTP',
+                                text: 'Submit',
                                 width: 100,
                                 onTap: (){
-
-                                  locator<HomeProvider>().sendFundTransferHomeData(context,amountController.text);
+                                  locator<HomeProvider>().sendFundTransferHomeData(context,amountController.text,memberIdController.text);
                                 }),
                           )
                         ],
@@ -77,7 +76,7 @@ p2pBottomSheet(BuildContext buildContext,String amount){
                         right: 0,
                         child: IconButton(onPressed: (){
                           Navigator.pop(context);
-                        }, icon: const Icon(Icons.cancel_outlined),
+                        }, icon: const Icon(Icons.cancel_outlined,color: Colors.white,),
                             iconSize: 35),
                       )
                     ],

@@ -54,8 +54,9 @@ class _DirectIncomeScreenState extends State<DirectIncomeScreen> {
                     children: [
                       SizedBox(
                           width: width*0.7,
-                          child: black16Text('Sponsor Name: ${directIncomeModel.data![index].firstname}',)),
-                      black16Text('${directIncomeModel.data![index].memberID}',),
+                          child: black16Text('Sponsor Name: ${directIncomeModel.data![index].sponsorname}',)),
+                      black16Text('${directIncomeModel.data![index].sponsorid
+                      }',),
                     ],
                   ),
                   Row(

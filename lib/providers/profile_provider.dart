@@ -33,8 +33,8 @@ class ProfileProvider extends ChangeNotifier {
       Helpers.verifyInternet().then((intenet) {
         if (intenet) {
           editProfileData(context,phone,email,walletAddress).then((response) {
-            if(json.decode(response.body)['status'] == 1){
-              Helpers.createSnackBar(context,'Change Password Succusfully ');
+            if(json.decode(response.body)['status'] == "1"){
+              Helpers.createSnackBar(context,'Edit profile udpate');
             }else {
               Helpers.createErrorSnackBar(context,'User Not Exit');
             }
