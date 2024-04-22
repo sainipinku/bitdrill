@@ -1,7 +1,10 @@
 import 'dart:ffi';
 
+import 'package:bitdrill/screen/dashboard/report/componding_income.dart';
+import 'package:bitdrill/screen/dashboard/report/compounding_direct_income.dart';
 import 'package:bitdrill/screen/dashboard/report/direct_income_screen.dart';
 import 'package:bitdrill/screen/dashboard/report/level_income_screen.dart';
+import 'package:bitdrill/screen/dashboard/report/levelincomecompunding.dart';
 import 'package:bitdrill/screen/dashboard/report/reward_status.dart';
 import 'package:bitdrill/screen/dashboard/report/withdrwal_history.dart';
 import 'package:bitdrill/utils/constants.dart';
@@ -90,6 +93,13 @@ reportOptionContainer(
         Navigator.push(context, MaterialPageRoute(builder: (context) => DirectIncomeScreen(),));
       }else if (index == 2){
         Navigator.push(context, MaterialPageRoute(builder: (context) => LevelIncomeScreen(),));
+      }else if (index == 3){
+        Navigator.push(context, MaterialPageRoute(builder: (context) => CompondingIncome(),));
+      }else if (index == 4){
+        Navigator.push(context, MaterialPageRoute(builder: (context) => CompoundingDirectIncome(),));
+      }
+      else if (index == 5){
+        Navigator.push(context, MaterialPageRoute(builder: (context) => LevelIncomeCompounding(),));
       }
 
     },

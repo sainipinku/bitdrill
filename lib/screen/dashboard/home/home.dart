@@ -374,8 +374,10 @@ class _HomeState extends State<Home> {
                                         img: MyImages.deposit,
                                         title: deposit,
                                         onTap: () {
-                                          depositBottomSheet(
-                                              context, depositModel!);
+                                          if (depositModel != null) {
+                                            depositBottomSheet(context, depositModel);
+                                          }
+
                                         }),
                                     innerContainerComponent(
                                         img: MyImages.p2p,

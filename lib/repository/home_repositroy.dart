@@ -166,6 +166,7 @@ Future<DepositModel> getDepositDetailsHomeData(BuildContext context) async
   Overlay.of(context)!.insert(loader);
   SharedPreferences prefs = await SharedPreferences.getInstance();
   String userToken = prefs.getString('user_msrno') ?? '';
+  print('user msr no ============${userToken}');
   var url;
   url = Uri.parse('https://api.bitdrill.world/Service.svc/coinqr?msrno=$userToken&cryptotype=');
   final http.Response response = await http.get(
