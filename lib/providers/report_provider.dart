@@ -2,6 +2,7 @@ import 'package:bitdrill/model/CompoundDailyIncomeModel.dart';
 import 'package:bitdrill/model/DailyMiningModel.dart';
 import 'package:bitdrill/model/DirectIncomeCompoundModel.dart';
 import 'package:bitdrill/model/DirectIncomeModel.dart';
+import 'package:bitdrill/model/InvestHistroyModel.dart';
 import 'package:bitdrill/model/LevelIncomeCompundingModel.dart';
 import 'package:bitdrill/model/LevelIncomeModel.dart';
 import 'package:bitdrill/repository/report_repository.dart';
@@ -15,6 +16,7 @@ class ReportProvider extends ChangeNotifier {
   CompoundDailyIncomeModel? compoundDailyIncomeModel;
   DirectIncomeCompoundModel? directIncomeCompoundModel;
   LevelIncomeCompundingModel? levelIncomeCompundingModel;
+  InvestHistroyModel? investHistroyModel;
   void getDailyIncome(BuildContext context) async {
     try {
       Helpers.verifyInternet().then((intenet) {
@@ -37,6 +39,22 @@ class ReportProvider extends ChangeNotifier {
         if (intenet) {
           getCompoundDailyIncomeModel(context).then((response) {
             compoundDailyIncomeModel = response;
+            notifyListeners();
+          });
+        } else {
+          Helpers.createErrorSnackBar(context, "Please check your internet connection");
+        }
+      });
+    } catch (err) {
+      print('Something went wrong');
+    }
+  }
+  void getInvestHistroy(BuildContext context) async {
+    try {
+      Helpers.verifyInternet().then((intenet) {
+        if (intenet) {
+          investhistory(context).then((response) {
+            investHistroyModel = response;
             notifyListeners();
           });
         } else {

@@ -3,6 +3,7 @@ import 'dart:ffi';
 import 'package:bitdrill/screen/dashboard/report/componding_income.dart';
 import 'package:bitdrill/screen/dashboard/report/compounding_direct_income.dart';
 import 'package:bitdrill/screen/dashboard/report/direct_income_screen.dart';
+import 'package:bitdrill/screen/dashboard/report/invest_history.dart';
 import 'package:bitdrill/screen/dashboard/report/level_income_screen.dart';
 import 'package:bitdrill/screen/dashboard/report/levelincomecompunding.dart';
 import 'package:bitdrill/screen/dashboard/report/reward_status.dart';
@@ -53,6 +54,11 @@ class ReportScreen extends StatelessWidget {
       'icon': Icon(Icons.request_page_outlined,color: Colors.white,),
       'nextPage': RewardStatus()
     },
+    {
+      "title": investHistory,
+      'icon': Icon(Icons.request_page_outlined,color: Colors.white,),
+      'nextPage': RewardStatus()
+    },
   ];
 
   @override
@@ -100,6 +106,8 @@ reportOptionContainer(
       }
       else if (index == 5){
         Navigator.push(context, MaterialPageRoute(builder: (context) => LevelIncomeCompounding(),));
+      }  else if (index == 6){
+        Navigator.push(context, MaterialPageRoute(builder: (context) => InvestHistory(),));
       }
 
     },

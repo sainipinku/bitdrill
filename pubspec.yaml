@@ -52,6 +52,7 @@ dependencies:
   curved_progress_bar: ^1.0.2
   simple_ripple_animation: ^0.0.9
   animated_toggle_switch: ^0.8.2
+  linear_progress_bar: ^1.1.0
 
 
 dev_dependencies:

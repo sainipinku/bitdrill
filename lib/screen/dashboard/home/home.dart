@@ -19,7 +19,9 @@ import 'package:bitdrill/utils/my_app_theme.dart';
 import 'package:bitdrill/utils/my_images.dart';
 import 'package:bitdrill/utils/ui_helper.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_seekbar/seekbar/seekbar.dart';
 import 'package:intl/intl.dart';
+import 'package:linear_progress_bar/linear_progress_bar.dart';
 import 'package:provider/provider.dart';
 import 'package:simple_ripple_animation/simple_ripple_animation.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -400,20 +402,18 @@ class _HomeState extends State<Home> {
                                   children: [
                                     blackLight12Text(
                                         "$remainingLimit : \$ ${homeModel!.dashboard![0].totremain}"),
+
                                     Padding(
                                       padding: const EdgeInsets.symmetric(
                                           vertical: 6.0),
-                                      child: LinearProgressIndicator(
-                                          backgroundColor:
-                                          MyAppTheme.greyColor,
-                                          color: MyAppTheme.brownColor,
-                                          semanticsValue:
-                                          '${homeModel!.dashboard![0].isTotalEarned}',
-                                          minHeight: 15,
-                                          borderRadius:
-                                          BorderRadius.circular(12),
-                                          value: homeModel!
-                                              .dashboard![0].totremain),
+                                      child: LinearProgressBar(
+                                        maxSteps: homeModel!.dashboard![0].isTotalEarned.toInt(),
+                                        progressType: LinearProgressBar.progressTypeLinear, // Use Linear progress
+                                        currentStep: homeModel!.dashboard![0].totremain.toInt(),
+                                        progressColor: Colors.red,
+                                        backgroundColor: Colors.grey,
+                                      )
+                                      ,
                                     ),
                                     blackLight12Text(
                                         "Total earned \$ ${homeModel!.dashboard![0].isTotalEarned} of investment"),

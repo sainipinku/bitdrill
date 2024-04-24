@@ -31,6 +31,7 @@ const String weeklyIBBonus  = 'Weekly IB Bonus';
 const String rankBonus  = 'Rank & Bonus';
 const String compoundingDirectIncome  = 'Compounding Direct Income';
 const String compoundingLevelIncome  = 'Compounding Level Income';
+const String investHistory  = 'Invest History';
 const String compondingIncome  = 'Componding Income';
 const String componding  = 'Compond Invest';
 const String fundTransferHistory  = 'Fund Transfer History';

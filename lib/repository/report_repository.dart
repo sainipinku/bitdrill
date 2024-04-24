@@ -3,6 +3,7 @@ import 'package:bitdrill/model/CompoundDailyIncomeModel.dart';
 import 'package:bitdrill/model/DailyMiningModel.dart';
 import 'package:bitdrill/model/DirectIncomeCompoundModel.dart';
 import 'package:bitdrill/model/DirectIncomeModel.dart';
+import 'package:bitdrill/model/InvestHistroyModel.dart';
 import 'package:bitdrill/model/LevelIncomeModel.dart';
 import 'package:bitdrill/model/LevelIncomeCompundingModel.dart';
 import 'package:bitdrill/utils/helper.dart';
@@ -170,6 +171,34 @@ Future<LevelIncomeCompundingModel> levelincomecompunding(BuildContext context,St
     print('status true ==${response.body}');
     Helpers.hideLoader(loader);
     return  LevelIncomeCompundingModel.fromJson(json.decode(response.body));
+
+  } else {
+    print('status flause');
+    Helpers.hideLoader(loader);
+    throw new Exception(response.body);
+
+  }
+
+}
+
+Future<InvestHistroyModel> investhistory(BuildContext context) async
+{
+  OverlayEntry loader = Helpers.overlayLoader(context);
+  Overlay.of(context)!.insert(loader);
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  String userToken = prefs.getString('user_msrno') ?? '';
+  var url;
+  url = Uri.parse('https://api.bitdrill.world/Service.svc/investhistory?msrno=$userToken');
+  final http.Response response = await http.get(
+    url,
+    headers: <String, String>{
+      'Content-Type': 'application/json; charset=UTF-8',
+    },
+  );
+  if (response.statusCode == 200) {
+    print('status true ==${response.body}');
+    Helpers.hideLoader(loader);
+    return  InvestHistroyModel.fromJson(json.decode(response.body));
 
   } else {
     print('status flause');
