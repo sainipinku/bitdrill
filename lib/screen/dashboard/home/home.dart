@@ -407,7 +407,7 @@ class _HomeState extends State<Home> {
                                       padding: const EdgeInsets.symmetric(
                                           vertical: 6.0),
                                       child: LinearProgressBar(
-                                        maxSteps: homeModel!.dashboard![0].totCappingremain.toInt(),
+                                        maxSteps: homeModel!.dashboard![0].totCappingremain != 0 ? homeModel!.dashboard![0].totCappingremain.toInt() : 100,
                                         progressType: LinearProgressBar.progressTypeLinear, // Use Linear progress
                                         currentStep:homeModel!.dashboard![0].isTotalEarned.toInt(),
                                         progressColor: Colors.red,
