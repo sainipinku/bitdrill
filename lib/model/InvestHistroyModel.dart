@@ -34,6 +34,7 @@ class Data {
   String? memberName;
   String? mstatus;
   String? adddate;
+  String? maturitydate;
 
   Data(
       {this.msrno1,
@@ -41,7 +42,8 @@ class Data {
         this.memberid,
         this.memberName,
         this.mstatus,
-        this.adddate});
+        this.adddate,
+        this.maturitydate});
 
   Data.fromJson(Map<String, dynamic> json) {
     msrno1 = json['msrno1'];
@@ -50,6 +52,7 @@ class Data {
     memberName = json['MemberName'];
     mstatus = json['mstatus'];
     adddate = json['adddate'];
+    maturitydate = json['maturitydate'];
   }
 
   Map<String, dynamic> toJson() {

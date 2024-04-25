@@ -2,11 +2,14 @@ import 'dart:ffi';
 
 import 'package:bitdrill/screen/dashboard/report/componding_income.dart';
 import 'package:bitdrill/screen/dashboard/report/compounding_direct_income.dart';
+import 'package:bitdrill/screen/dashboard/report/deposite_history.dart';
 import 'package:bitdrill/screen/dashboard/report/direct_income_screen.dart';
 import 'package:bitdrill/screen/dashboard/report/invest_history.dart';
 import 'package:bitdrill/screen/dashboard/report/level_income_screen.dart';
 import 'package:bitdrill/screen/dashboard/report/levelincomecompunding.dart';
+import 'package:bitdrill/screen/dashboard/report/p2p_history.dart';
 import 'package:bitdrill/screen/dashboard/report/reward_status.dart';
+import 'package:bitdrill/screen/dashboard/report/withdrawal_history.dart';
 import 'package:bitdrill/screen/dashboard/report/withdrwal_history.dart';
 import 'package:bitdrill/utils/constants.dart';
 import 'package:bitdrill/utils/my_app_theme.dart';
@@ -59,6 +62,21 @@ class ReportScreen extends StatelessWidget {
       'icon': Icon(Icons.request_page_outlined,color: Colors.white,),
       'nextPage': RewardStatus()
     },
+    {
+      "title": depositHistory,
+      'icon': Icon(Icons.request_page_outlined,color: Colors.white,),
+      'nextPage': RewardStatus()
+    },
+    {
+      "title": withdrawalHistory,
+      'icon': Icon(Icons.request_page_outlined,color: Colors.white,),
+      'nextPage': RewardStatus()
+    },
+    {
+      "title": p2pHistory,
+      'icon': Icon(Icons.request_page_outlined,color: Colors.white,),
+      'nextPage': RewardStatus()
+    },
   ];
 
   @override
@@ -108,6 +126,12 @@ reportOptionContainer(
         Navigator.push(context, MaterialPageRoute(builder: (context) => LevelIncomeCompounding(),));
       }  else if (index == 6){
         Navigator.push(context, MaterialPageRoute(builder: (context) => InvestHistory(),));
+      }else if (index == 7){
+        Navigator.push(context, MaterialPageRoute(builder: (context) => DepositeHistory(),));
+      }else if (index == 8){
+        Navigator.push(context, MaterialPageRoute(builder: (context) => WithdrawalHistory(),));
+      }else if (index == 9){
+        Navigator.push(context, MaterialPageRoute(builder: (context) => P2PHistory(),));
       }
 
     },

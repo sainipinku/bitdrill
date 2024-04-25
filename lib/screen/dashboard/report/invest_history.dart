@@ -66,7 +66,8 @@ class _InvestHistoryState extends State<InvestHistory> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           blackLight14Text('${investHistroyModel.data![index].adddate}',),
-                          blackLight14Text('Invest Type -${investHistroyModel.data![index].mstatus}',),
+                          blackLight14Text('Invest Type - ${investHistroyModel.data![index].mstatus}',),
+                          blackLight14Text('Maturity- ${investHistroyModel.data![index].maturitydate}',),
                         ],
                       ),
                       miniBrownContainer(text: '\$ ${investHistroyModel.data![index].investAmount}'),
