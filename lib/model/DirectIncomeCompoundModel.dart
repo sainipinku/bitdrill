@@ -1,6 +1,6 @@
 class DirectIncomeCompoundModel {
-  String? status;
-  String? msg;
+  var status;
+  var msg;
   List<Data>? data;
 
   DirectIncomeCompoundModel({this.status, this.msg, this.data});
@@ -28,12 +28,12 @@ class DirectIncomeCompoundModel {
 }
 
 class Data {
-  int? amount;
-  String? sponsorid;
-  String? sponsorname;
+  var amount;
+  var sponsorid;
+  var sponsorname;
   String? memberID;
   String? firstname;
-  int? amount1;
+  var amount1;
   String? addDate;
 
   Data(

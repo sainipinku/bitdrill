@@ -62,7 +62,13 @@ class _InvestHistoryState extends State<InvestHistory> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      blackLight14Text('${investHistroyModel.data![index].adddate}',),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          blackLight14Text('${investHistroyModel.data![index].adddate}',),
+                          blackLight14Text('Invest Type -${investHistroyModel.data![index].mstatus}',),
+                        ],
+                      ),
                       miniBrownContainer(text: '\$ ${investHistroyModel.data![index].investAmount}'),
                     ],
                   ),
