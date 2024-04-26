@@ -10,6 +10,7 @@ import 'package:bitdrill/utils/my_styles.dart';
 import 'package:bitdrill/utils/ui_helper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 
 
@@ -69,7 +70,19 @@ depositBottomSheet(BuildContext buildContext,DepositModel depositModel){
                           const SizedBox(height: 10,),
                           blackLight14Text("Wallet Address"),
                           const SizedBox(height: 10,),
-                          black16Text('${depositModel.data![0].walletAddress}'),
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Container(
+                                width: MediaQuery.of(context).size.width * 0.75,
+                                  child: black16Text('${depositModel.data![0].walletAddress}')),
+                              IconButton(onPressed: (){
+                                Clipboard.setData(ClipboardData(text: "${depositModel.data![0].walletAddress}"));
+                              }, icon:  Icon(Icons.copy,color: Colors.white,),)
+                            ],
+                          )
+                          ,
                           const SizedBox(height: 10,),
                           black16Text('Request Crypto'),
                           const SizedBox(height: 10,),
